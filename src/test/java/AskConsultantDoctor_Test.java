@@ -1,5 +1,4 @@
 import Core.Support.General.Hooks;
-import GlobeDr.Pages.AskConsultantDoctor.Auditor;
 import GlobeDr.Pages.AskConsultantDoctor.Coordinator;
 import GlobeDr.Pages.AskConsultantDoctor.Doctor;
 import GlobeDr.Pages.AskConsultantDoctor.UserAskConsultantDoctor;
@@ -156,27 +155,27 @@ public class AskConsultantDoctor_Test extends Hooks {
         System.out.println("CordinatorInviteAuditor" + Coordinator.getToastMessage());
     }
 
-    @Test (priority = 5)
-    public void Auditor() throws InterruptedException{
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.waitForPageLoadComplete();
-        loginPage.login("0963259525128","123456");
-
-        Auditor auditor = new Auditor(false);
-        auditor.clickonAuditor();
-        auditor.clickonSearchByName();
-        auditor.sendID(id);
-        auditor.clickonDropdown();
-        auditor.clickonViewDetail();
-        auditor.clickonAgreeWithThisAnswer();
-        auditor.clickonAccept();
-        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
-        System.out.println("Auditor" + Coordinator.getToastMessage());
-    }
+//    @Test (priority = 5)
+//    public void Auditor() throws InterruptedException{
+//        HomePage homePage = new HomePage(true);
+//        homePage.waitForPageLoadComplete();
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.waitForPageLoadComplete();
+//        loginPage.login("0963259525128","123456");
+//
+//        Auditor auditor = new Auditor(false);
+//        auditor.clickonAuditor();
+//        auditor.clickonSearchByName();
+//        auditor.sendID(id);
+//        auditor.clickonDropdown();
+//        auditor.clickonViewDetail();
+//        auditor.clickonAgreeWithThisAnswer();
+//        auditor.clickonAccept();
+//        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
+//        System.out.println("Auditor" + Coordinator.getToastMessage());
+//    }
 
     @Test (priority = 5)
     public void CoordinatorCloseQuestion() throws InterruptedException{

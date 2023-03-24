@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Test Globedr"  >
+    <suite-files>
+        <suite-file path="Suite_Login.xml" />
+        <suite-file path="Suite_Account.xml" />
+        <suite-file path="Suite_AskConsultant.xml" />
+        <suite-file path="Suite_Appointment.xml" />
+        <suite-file path="Suite_RCE.xml" />
+    </suite-files>
+</suite>

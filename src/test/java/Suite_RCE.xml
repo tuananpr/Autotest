@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Test RCE">
+    <test name="RCEopenNewOrder">
+        <classes>
+            <class name="RCE_Test"/>
+            <methods>
+            </methods>
+        </classes>
+    </test>
+</suite>

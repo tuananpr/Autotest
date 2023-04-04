@@ -145,5 +145,6 @@ public class UserUpdateInfoPage extends BaseGlobeDrPage {
     public void clickon_Save(){
         button_Save.waitForClickable();
         button_Save.click();
+        waitForJSToComplete();
     }
 }

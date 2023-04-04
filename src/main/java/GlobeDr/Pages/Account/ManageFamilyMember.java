@@ -87,8 +87,9 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     }
 
     public void send_CMND_CCCD(String number) {
-        textbox_CMND_CCCD.waitForElementToBePresent();
+        textbox_CMND_CCCD.waitForElementToBeDisplay();
         textbox_CMND_CCCD.sendClearText(number);
+        waitForJSToComplete();
     }
 
     public void send_Fullname(String Fullname){
@@ -214,7 +215,7 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
         }
     }
 
-    public void share_Method(String method){
+    public void share_Method(String method) throws InterruptedException {
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_Method_ShareAccount),"list_Method_ShareAccount");
         for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
             if(listOfElements.getElement(i).getText().contains(method)){
@@ -226,7 +227,7 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
         if(button_Complete_ShareAccount.isElementDisplay()){
             button_Complete_ShareAccount.waitForClickable();
             button_Complete_ShareAccount.click();
-        }waitForJSToComplete();
+        }
     }
 
     public void clickon_Select_Method(){

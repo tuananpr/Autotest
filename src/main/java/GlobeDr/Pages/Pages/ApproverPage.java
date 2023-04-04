@@ -66,7 +66,7 @@ public class ApproverPage extends BaseGlobeDrPage {
             for (int i = 0; i < listOfElements_Status.getNumberOfElement(); i++) {
                 for (int j = 0; j < data.size(); j++) {
                     if ((listOfElements_Status.getElement(i).getText().equalsIgnoreCase(data.get(j))) && (listOfElements_Name.getElement(j).getText().contains(name))) {
-                        listOfElements_Status.scrollToTopOfPage();
+                        listOfElements_Status.scrollToElement(i);
                         listOfElements_Dropdown.getElement(i).click();
                         clickon_Close_question();
                         waitForLoadingComplete();

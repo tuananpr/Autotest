@@ -1,4 +1,5 @@
 import Core.Support.General.Hooks;
+import GlobeDr.Pages.AskConsultantDoctor.Auditor;
 import GlobeDr.Pages.AskConsultantDoctor.Coordinator;
 import GlobeDr.Pages.AskConsultantDoctor.Doctor;
 import GlobeDr.Pages.AskConsultantDoctor.UserAskConsultantDoctor;
@@ -20,7 +21,8 @@ public class AskConsultantDoctor_Test extends Hooks {
     public void tearDown(){
         after();
     }
-    String id;
+    String id
+            ;
 
     @Test (priority = 1)
     public void UserAskConsultantDoctor() throws InterruptedException {
@@ -55,45 +57,14 @@ public class AskConsultantDoctor_Test extends Hooks {
         loginPage.waitForPageLoadComplete();
 
         Coordinator coordinator = new Coordinator(false);
-        coordinator.clickonRole("Vào trang điều phối viên");
-        coordinator.clickonCoordinator();
-        coordinator.clickonSearchByName();
-        coordinator.sendIDConsultant(id);
-        coordinator.clickonFilter();
-        coordinator.clickonDropdown();
-        coordinator.clickon_Edit_Specialty();
-        coordinator.select_Edit_Specialty("Tâm lý");
-        coordinator.clickonInviteDoctor();
-        coordinator.clickonSearchDoctor();
-        coordinator.selectDoctor("BS TÂM");
-        coordinator.clickon_Done();
-        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
-        System.out.println("CoordinatorInviteDoctor" + Coordinator.getToastMessage());
-    }
-
-    @Test (priority = 2)
-    public void CoordinatorInviteDoctor() throws InterruptedException {
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login("096325952516","123456");
-        loginPage.waitForPageLoadComplete();
-
-        Coordinator coordinator = new Coordinator(false);
-        coordinator.clickonRole("Vào trang điều phối viên");
-        coordinator.clickonCoordinator();
-        coordinator.clickonSearchByName();
-        coordinator.sendIDConsultant(id);
-        coordinator.clickonFilter();
-        coordinator.clickonDropdown();
-        coordinator.clickonViewDetail();
-        coordinator.clickonInviteDoctor();
-        coordinator.clickonSearchDoctor();
-        coordinator.selectDoctor("BS TÂM");
-        coordinator.clickon_Done();
-        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
-        System.out.println("CoordinatorInviteDoctor" + Coordinator.getToastMessage());
+        coordinator.clickon_Role("Vào trang điều phối viên");
+        coordinator.clickon_Coordinator();
+        coordinator.clickon_Dropdown(id);
+        coordinator.clickon_Dropdown_EditSpecialty();
+        coordinator.select_EditSpecialty("Tai Mũi Họng","Tự động");
+        coordinator.clickon_Dropdown(id);
+        coordinator.clickon_Dropdown_InviteDoctor("BS TÂM");
+        id = coordinator.get_IDConsultant(id);
     }
 
     @Test (priority = 3)
@@ -107,30 +78,25 @@ public class AskConsultantDoctor_Test extends Hooks {
         loginPage.waitForPageLoadComplete();
 
         Doctor doctor = new Doctor(false);
-        doctor.selectRole("Vào trang hành nghề");
-        doctor.clickonAnswerConsultant();
-        doctor.clickSearchName();
-        doctor.sendID(id);
-        doctor.clickonFilter();
-        doctor.clickonDropdown();
-        doctor.clickonViewDetail();
-        doctor.clickonAccept();
-        doctor.clickonYes();
-        doctor.sendAnswerQuestion("Bạn cần phải đi xét nghiệm máu nha.");
-        doctor.clickonSend();
-        doctor.clickonPrescribeTest();
-        doctor.selectHospital("BỆNH VIỆN TRƯNG VƯƠNG");
-        doctor.sendNamePrescribeTest("Mỡ Máu","LIPID - MỠ MÁU","Cholesterol");
-        doctor.clickonConfirmTest();
-        doctor.clickonCompleted();
-        doctor.clickonYes();
-        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
-        System.out.println("Doctor" + Coordinator.getToastMessage());
+        doctor.select_Role("Vào trang hành nghề");
+        doctor.clickon_AnswerConsultant();
+        doctor.click_SearchName();
+        doctor.send_ID(id);
+        doctor.clickon_Dropdown(id);
+        doctor.clickon_ViewDetail();
+        doctor.clickon_Accept();
+        doctor.send_AnswerQuestion("Bạn cần phải đi xét nghiệm máu nha.");
+        doctor.clickon_PrescribeTest();
+        doctor.select_Hospital("BỆNH VIỆN TRƯNG VƯƠNG");
+        doctor.send_NamePrescribeTest("Mỡ Máu","LIPID - MỠ MÁU","Cholesterol");
+        doctor.clickon_Completed();
+
+        id = doctor.get_IDConsultant();
     }
 
     @Test (priority = 4)
     public void CordinatorInviteAuditor() throws InterruptedException{
-        HomePage homePage = new HomePage(true);
+        HomePage homePage = new HomePage(false);
         homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
 
@@ -139,43 +105,38 @@ public class AskConsultantDoctor_Test extends Hooks {
         loginPage.login("096325952516","123456");
 
         Coordinator coordinator = new Coordinator(false);
-        coordinator.clickonRole("Vào trang điều phối viên");
-        coordinator.clickonCoordinator();
-        coordinator.clickonSearchByName();
-        coordinator.sendIDConsultant(id);
-        coordinator.clickonFilter();
-        coordinator.clickonDropdown();
-        coordinator.clickonViewDetail();
-        coordinator.clickonInviteAuditor();
-        coordinator.sendNameAuditor("Tuấn");
-        coordinator.clickonSearchAuditor();
-        coordinator.selectAuditor("Mr Tuấn(Auditor)");
-        coordinator.clickon_Done();
-        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
-        System.out.println("CordinatorInviteAuditor" + Coordinator.getToastMessage());
+        coordinator.clickon_Role("Vào trang điều phối viên");
+        coordinator.clickon_Coordinator();
+        coordinator.clickon_SearchByName();
+        coordinator.send_IDConsultant(id);
+        coordinator.clickon_Dropdown(id);
+        coordinator.clickon_ViewDetail();
+        coordinator.clickon_InviteAuditor();
+        coordinator.send_NameAuditor("Tuấn");
+        coordinator.clickon_SearchAuditor();
+        coordinator.select_Auditor("MR TUẤN(AUDITOR)");
+        id = coordinator.get_IDConsultant(id);
     }
 
-//    @Test (priority = 5)
-//    public void Auditor() throws InterruptedException{
-//        HomePage homePage = new HomePage(true);
-//        homePage.waitForPageLoadComplete();
-//        homePage.clickon_LoginButton();
-//
-//        LoginPage loginPage = new LoginPage(true);
-//        loginPage.waitForPageLoadComplete();
-//        loginPage.login("0963259525128","123456");
-//
-//        Auditor auditor = new Auditor(false);
-//        auditor.clickonAuditor();
-//        auditor.clickonSearchByName();
-//        auditor.sendID(id);
-//        auditor.clickonDropdown();
-//        auditor.clickonViewDetail();
-//        auditor.clickonAgreeWithThisAnswer();
-//        auditor.clickonAccept();
-//        Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
-//        System.out.println("Auditor" + Coordinator.getToastMessage());
-//    }
+    @Test (priority = 5)
+    public void Auditor() throws InterruptedException{
+        HomePage homePage = new HomePage(true);
+        homePage.waitForPageLoadComplete();
+        homePage.clickon_LoginButton();
+
+        LoginPage loginPage = new LoginPage(true);
+        loginPage.waitForPageLoadComplete();
+        loginPage.login("0963259525128","123456");
+
+        Auditor auditor = new Auditor(false);
+        auditor.clickon_Auditor();
+        auditor.clickon_SearchByName();
+        auditor.send_ID(id);
+        auditor.clickon_Dropdown();
+        auditor.clickon_ViewDetail();
+        auditor.clickon_AgreeWithThisAnswer();
+        id = auditor.get_IDConsultant();
+    }
 
     @Test (priority = 5)
     public void CoordinatorCloseQuestion() throws InterruptedException{
@@ -188,15 +149,12 @@ public class AskConsultantDoctor_Test extends Hooks {
         loginPage.login("096325952516","123456");
 
         Coordinator coordinator = new Coordinator(false);
-        coordinator.clickonRole("Vào trang điều phối viên");
-        coordinator.clickonCoordinator();
-        coordinator.clickonSearchByName();
-        coordinator.sendIDConsultant(id);
-        coordinator.clickonFilter();
-        coordinator.clickonDropdown();
-        coordinator.clickonViewDetail();
-        coordinator.clickonCloseQuestion();
-        coordinator.clickonOK();
+        coordinator.clickon_Role("Vào trang điều phối viên");
+        coordinator.clickon_Coordinator();
+        coordinator.clickon_SearchByName();
+        coordinator.send_IDConsultant(id);
+        coordinator.clickon_Dropdown(id);
+        coordinator.clickon_CloseQuestion();
         Assert.assertTrue(Coordinator.getToastMessage().contains("Thành công"),"Thành công");
         System.out.println("CoordinatorCloseQuestion" + Coordinator.getToastMessage());
     }

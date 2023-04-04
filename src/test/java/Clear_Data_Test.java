@@ -28,6 +28,7 @@ public class Clear_Data_Test extends Hooks {
         data.add("Đã tiếp nhận");
         data.add("Bác sĩ đã trả lời");
         data.add("Bác sĩ đã nhận");
+        data.add("Gửi cố vấn duyệt");
 
         HomePage homePage = new HomePage(true);
         homePage.waitForPageLoadComplete();
@@ -40,8 +41,8 @@ public class Clear_Data_Test extends Hooks {
         ApproverPage approverPage = new ApproverPage(false);
         Approver.select_role("Vào trang điều phối viên");
         Approver.select_feature("Điều phối viên");
-        approverPage.send_Name("TRẦN QQ");
-        approverPage.clear_Data(data,"TRẦN QQ");
+        approverPage.send_Name("BN.Tuan.26");
+        approverPage.clear_Data(data,"BN.Tuan.26");
     }
 
 //    @Test

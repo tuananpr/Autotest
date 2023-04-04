@@ -5,7 +5,7 @@ import GlobeDr.Pages.BaseGlobeDrPage;
 import org.openqa.selenium.By;
 
 public class UserAskConsultantDoctor extends BaseGlobeDrPage {
-    private final static By by = By.xpath("//app-user");
+    private final static By by = By.xpath("//app-home-user");
     private static final String name = "Ask Consultant Doctor";
 
     //locators
@@ -20,7 +20,6 @@ public class UserAskConsultantDoctor extends BaseGlobeDrPage {
     public final String xpath_textbox_YourQuestion = "//div[@class='form-group form-group-default']/textarea";
     public final String xpath_btn_ChooseDisease = "//div//label[@translate='chooseDisease']/preceding-sibling::div";
     public final String xpath_list_Disease = "//div[@class='slimScrollDiv']//p[@class='text-nowrap fw-bold']";
-    public final String xpath_list_Disease1 = "//div[@class='slimScrollDiv']//li";
     public final String xpath_fileuploader_ImageCreateNewQuestion = "(//div/button/app-file-upload/input)[1]";
     public final String xpath_btn_Create = "//button[@translate='create']";
     public final String xpath_ID_Consultant = "//span[@class='float-right fw-bold text-dark fs22 pt9 pb9 ng-star-inserted']";
@@ -65,9 +64,8 @@ public class UserAskConsultantDoctor extends BaseGlobeDrPage {
         waitForLoadingComplete();
     }
 
-    public void select_User(String user){
-//        label_ShowAccount.waitForElementToBeDisplay();
-//        label_ShowAccount.click();
+    public void select_User(String user) throws InterruptedException {
+        Thread.sleep(5000);
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_list_User),"listUser");
         for( int i = 0; i < listOfElements.getNumberOfElement(); i++){
             if(listOfElements.getElement(i).getText().contains(user)){

@@ -32,15 +32,15 @@ public class Login_Test extends Hooks {
         loginPage.label_personalPage(userID);
     }
 
-//    @Test (priority = 2)
-//    public void Login_successfully_Email() throws InterruptedException {
-//        HomePage homePage = new HomePage(false);
-//        homePage.waitForPageLoadComplete();
-//        homePage.clickon_LoginButton();
-//
-//        LoginPage loginPage = new LoginPage(true);
-//        loginPage.login(userEmail,pass);
-//        loginPage.waitForPageLoadComplete();
-//        loginPage.label_personalPage(userEmail);
-//    }
+    @Test (priority = 2)
+    public void Login_successfully_Email() throws InterruptedException {
+        HomePage homePage = new HomePage(false);
+        homePage.waitForPageLoadComplete();
+        homePage.clickon_LoginButton();
+
+        LoginPage loginPage = new LoginPage(true);
+        loginPage.login(userEmail,pass);
+        loginPage.waitForPageLoadComplete();
+        loginPage.label_personalPage(userEmail);
+    }
 }

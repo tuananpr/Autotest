@@ -3,6 +3,8 @@ import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
 import GlobeDr.Pages.Pages.ApproverPage;
 import GlobeDr.Pages.Pages.PracticePage;
+import GlobeDr.Pages.Pages.UserPage;
+import GlobeDr.Pages.RCE.RCEPersonalPage;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -45,26 +47,26 @@ public class Clear_Data_Test extends Hooks {
         approverPage.clear_Data(data,"BN.Tuan.26");
     }
 
-//    @Test
-//    public void Clear_Data_RCE() throws InterruptedException {
-//        List<String> status = new ArrayList<>();
-//        status.add("Mới");
-//        status.add("Chờ xác nhận");
-//        status.add("Đang chờ xác nhận");
-//        status.add("Đang chờ tư vấn");
-//        HomePage homePage = new HomePage(true);
-//        homePage.waitForPageLoadComplete();
-//        homePage.clickon_LoginButton();
-//
-//        LoginPage loginPage = new LoginPage(true);
-//        loginPage.login("0969617267", "123456");
-//
-//        UserPage userPage = new UserPage(true);
-//        userPage.waitForPageLoadComplete();
-//        userPage.clickonRCE_User();
-//
-//        RCEPersonalPage rcePersonalPage = new RCEPersonalPage(true);
-//        rcePersonalPage.waitForPageLoadComplete();
-//        rcePersonalPage.clickon_Cancel_All_Order_RCE(status);
-//    }
+    @Test
+    public void Clear_Data_RCE() throws InterruptedException {
+        List<String> status = new ArrayList<>();
+        status.add("Mới");
+        status.add("Chờ xác nhận");
+        status.add("Đang chờ xác nhận");
+        status.add("Đang chờ tư vấn");
+        HomePage homePage = new HomePage(true);
+        homePage.waitForPageLoadComplete();
+        homePage.clickon_LoginButton();
+
+        LoginPage loginPage = new LoginPage(true);
+        loginPage.login("0969617267", "123456");
+
+        UserPage userPage = new UserPage(true);
+        userPage.waitForPageLoadComplete();
+        userPage.clickonRCE_User();
+
+        RCEPersonalPage rcePersonalPage = new RCEPersonalPage(true);
+        rcePersonalPage.waitForPageLoadComplete();
+        rcePersonalPage.clickon_Cancel_All_Order_RCE(status);
+    }
 }

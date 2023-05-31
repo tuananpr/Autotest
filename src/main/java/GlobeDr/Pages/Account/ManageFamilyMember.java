@@ -228,6 +228,7 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
             button_Complete_ShareAccount.waitForClickable();
             button_Complete_ShareAccount.click();
         }
+        waitForLoadingComplete();
     }
 
     public void clickon_Select_Method(){

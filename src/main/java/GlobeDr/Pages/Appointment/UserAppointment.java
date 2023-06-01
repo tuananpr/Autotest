@@ -15,10 +15,10 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final String xpath_Appointment = "//a[@href='/appointment']";
     private final String xpath_CreateNewAppointment = "//button[@translate='createNewAppointment']";
     private final String xpath_ShowAccount = "//div[@class='form-control d-flex align-items-center']";
-    public final String xpath_SelectAccount = "//div[@class='mr-auto']";
+
     private final String xpath_InputHospitalClinic = "//div[@class='row no-margin']/div/div/input";
     private final String xpath_SearchHospitalClinic = "//div[@class='row no-margin']/div/div[@class='form-group']/i";
-    private final String xpath_ButtonConfirmService = "//div/button[@translate='confirmService']";
+
     private final String xpath_LabelHospitalClinic = "//label[@translate='selectHospitalClinic']/preceding-sibling::span";
     public final String xpath_ListHospitalClinic = "//div[@class='mr10']";
     private final String xpath_ButtonDone = "//button[@translate='done']";
@@ -62,7 +62,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final Button buttonShowAccount = new Button(By.xpath(xpath_ShowAccount),"btnShowAccount");
     private final Textbox textboxHospitalClinic = new Textbox(By.xpath(xpath_InputHospitalClinic),"textboxHospitalClinic");
     private final Button buttonSearchHospitalClinic = new Button(By.xpath(xpath_SearchHospitalClinic),"btnSearchHospitalClinic");
-    private final Button buttonConfirmService = new Button(By.xpath(xpath_ButtonConfirmService),"btnConfirmService");
+
     private final Button buttonHospitalClinic = new Button(By.xpath(xpath_LabelHospitalClinic),"btnHospitalClinic");
 
     private final Button buttonDone = new Button(By.xpath(xpath_ButtonDone),"btnDone");
@@ -114,24 +114,8 @@ public class UserAppointment extends BaseGlobeDrPage {
         buttonShowAccount.click();
     }
 
-    public void selectAccount(String Account){
-        waitForLoadingComplete();
-//        clickonAccount();
-        ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_SelectAccount),"SelectAccount");
-        for (int i = 0; i< listOfElements.getNumberOfElement() ; i++){
-            if (listOfElements.getElement(i).getText().contains(Account)){
-                listOfElements.getElement(i).click();
-                waitForJSToComplete();
-            }
-        }
-        clickonConfirmService();
-    }
 
-    public void clickonConfirmService(){
-        buttonConfirmService.waitForClickable();
-        buttonConfirmService.click();
-        waitForJSToComplete();
-    }
+
 
     public void clickonHospitalClinic(){
         buttonHospitalClinic.waitForClickable();

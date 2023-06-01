@@ -72,6 +72,7 @@ public class Appointment_Test extends Hooks {
         orgAppointment.clickonSave();
         Assert.assertTrue(OrgAppointment.getToastMessage().contains("Thành công"));
         System.out.println(OrgAppointment.getToastMessage());
+
     }
 
     @Test(priority = 3)

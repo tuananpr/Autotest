@@ -1,7 +1,6 @@
 package GlobeDr.Pages.Appointment;
 
 import Core.Selenium.*;
-import Core.Support.Selenium.BrowserManager;
 import GlobeDr.Pages.BaseGlobeDrPage;
 import GlobeDr.Pages.Modules.Calendar;
 import org.openqa.selenium.By;
@@ -46,7 +45,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final String xpath_CompanyTaxCode = "//label[@translate='taxCode']/preceding-sibling::input";
     private final String xpath_ButtonPayment = "//button[contains(@class,'btn btn-success')]";
     private final String xpath_ButtonConfirmAppointment = "//button[@translate='confirmAppointment']";
-    private final String xpath_ButtonContinue = "//button[@translate='continue']";
+    private final String xpath_ButtonContinue = "//button[@translate='warningAppt1']";
     private final String xpath_QRCodeHealthInsurance = "//label[@translate='qRCodeHealthInsurance']/preceding-sibling::input";
     private final String xpath_FrontFaceHealthInsurance = "(//button/app-file-upload/input)[1]";
     private final String xpath_BackFaceHealthInsurance = "(//button/app-file-upload/input)[2]";
@@ -54,16 +53,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final String xpath_FrontFaceIDcardCitizenIdentification = "(//button/app-file-upload/input)[3]";
     private final String xpath_BackFaceIDcardCitizenIdentification = "(//button/app-file-upload/input)[4]";
     private final String xpath_ConfirmPersonalInformation = "//button[@translate='confirmPersonalInformation']";
-    private final String xpath_Payment = "//span[contains(text(),'Thanh toán')]";
-    private final String xpath_StatusAppointment = "//div[@class='d-flex']";
-    private final String xpath_IDcardBank = "//label[contains(text(),'Số thẻ')]/preceding-sibling::input";
     private final String xpath_IDAppointment = "//p[@class='fs18 mb5 text-dark fw-bold']";
-    private final String xpath_CardHolderName = "//label[@for='card-holder-name']/preceding-sibling::input";
-    private final String xpath_CardDate = "//label[@for='card-date']/preceding-sibling::input";
-    private final String xpath_CardCVV = "//label[@for='card-cvv']/preceding-sibling::input";
-    private final String xpath_NextPayment = "//button[contains(text(),'Tiếp tục')]";
-    private final String xpath_ConfirmPayment = "//button[contains(text(),'Thanh Toán')]";
-    private final String xpath_ConfirmPayoo = "//input[@name='btnVerify']";
 
 
     //elements
@@ -105,14 +95,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final FileUploader fileUploaderBackFaceIDcardCitizenIdentification = new FileUploader(By.xpath(xpath_BackFaceIDcardCitizenIdentification),"textboxBackFaceIDcardCitizenIdentification");
     private final Button buttonConfirmPersonalInformation = new Button(By.xpath(xpath_ConfirmPersonalInformation),"btnConfrimPersonalInformation");
     private final Label labelIDAppointment = new Label(By.xpath(xpath_IDAppointment),"labelIDAppointment");
-    private final Button buttonPayment = new Button(By.xpath(xpath_Payment),"btnPayment");
-    private final Textbox textboxIDCardBank = new Textbox(By.xpath(xpath_IDcardBank),"textboxIDCardBank");
-    private final Textbox textboxCardHolderName = new Textbox(By.xpath(xpath_CardHolderName),"textboxCardHolderName");
-    private final Textbox textboxCardDate = new Textbox(By.xpath(xpath_CardDate),"textboxCardDate");
-    private final Textbox textboxCardCVV = new Textbox(By.xpath(xpath_CardCVV),"textboxCardCVV");
-    private final Button buttonNextPayment = new Button(By.xpath(xpath_NextPayment),"btnNextPayment");
-    private final Button buttonConfirmPayment = new Button(By.xpath(xpath_ConfirmPayment),"btnConfirmPayment");
-    private final Button buttonConfirmPayoo = new Button(By.xpath(xpath_ConfirmPayoo),"btnConfirmPayoo");
+
     //contructor
     public UserAppointment(boolean assertOpen) {super(by,name, assertOpen);
     }
@@ -132,7 +115,8 @@ public class UserAppointment extends BaseGlobeDrPage {
     }
 
     public void selectAccount(String Account){
-        clickonAccount();
+        waitForLoadingComplete();
+//        clickonAccount();
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_SelectAccount),"SelectAccount");
         for (int i = 0; i< listOfElements.getNumberOfElement() ; i++){
             if (listOfElements.getElement(i).getText().contains(Account)){
@@ -208,6 +192,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     }
 
     public void selectServices(String Service,String specialty, String day,String date, String session, String doctor) throws InterruptedException {
+        waitForLoadingComplete();
         clickonServices();
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_ListServices),"ListServices");
         for (int i = 0 ; i < listOfElements.getNumberOfElement(); i++){
@@ -306,7 +291,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     public void clickonPaymentAppointment() throws InterruptedException {
         buttonPaymentAppoitnment.waitForClickable();
         buttonPaymentAppoitnment.click();
-        waitForJSToComplete();
+        waitForLoadingComplete();
         if(buttonContinue.isElementDisplay()){
             buttonContinue.click();
             sleep(2000);
@@ -314,6 +299,7 @@ public class UserAppointment extends BaseGlobeDrPage {
         } else {
             sleep(2000);
         }
+        waitForLoadingComplete();
     }
 
     public void clickonConfirmAppointment(){
@@ -377,8 +363,8 @@ public class UserAppointment extends BaseGlobeDrPage {
         fileUploaderBackFaceIDcardCitizenIdentification.upload(System.getProperty("user.dir")+"/src/main/resources/image/"+BackFaceIDcard);
     }
 
-
     public String getIDAppointment(){
+        waitForPageLoadComplete();
         String ID = labelIDAppointment.getText().substring(13);
         System.out.println(ID);
         return ID;
@@ -412,25 +398,6 @@ public class UserAppointment extends BaseGlobeDrPage {
 //        BrowserManager.getInstance().closeWindow();
 //    }
 
-    public void clickPayment() throws InterruptedException {
-        sleep(6000);
-        BrowserManager.getInstance().switchToWindow(1);
-        textboxIDCardBank.sendClearText("4111-1111-1111-1111");
-        textboxCardHolderName.sendClearText("Vũ Trụ");
-        textboxCardDate.sendText("05");
-        sleep(700);
-        textboxCardDate.sendText("25");
-        textboxCardCVV.sendText("897");
-        buttonNextPayment.click();
-        waitForJSToComplete();
-        buttonConfirmPayment.waitForClickable();
-        buttonConfirmPayment.click();
-        waitForJSToComplete();
-        buttonConfirmPayoo.waitForClickable();
-        buttonConfirmPayoo.click();
-        waitForJSToComplete();
-        sleep(3000);
-        BrowserManager.getInstance().closeWindow();
-    }
+
 
 }

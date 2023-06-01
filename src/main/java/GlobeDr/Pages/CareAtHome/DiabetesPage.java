@@ -1,4 +1,4 @@
-package GlobeDr.Pages.CareAtHome.User;
+package GlobeDr.Pages.CareAtHome;
 
 import Core.Selenium.Textbox;
 import GlobeDr.Pages.BaseGlobeDrPage;

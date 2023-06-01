@@ -4,6 +4,7 @@ import GlobeDr.Pages.Appointment.UserAppointment;
 import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
 import GlobeDr.Pages.Pages.OrgPage;
+import GlobeDr.Pages.Pages.Payment;
 import GlobeDr.Pages.Pages.UserPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -21,7 +22,7 @@ public class Appointment_Test extends Hooks {
     public void tearDown() {
         after();
     }
-    String id;
+    String id ;
 
     @Test(priority = 1)
     public void UserAppointment_Firsttimeexamination() throws InterruptedException {
@@ -33,7 +34,7 @@ public class Appointment_Test extends Hooks {
         loginPage.login("0963259526", "123456");
         loginPage.waitForPageLoadComplete();
 
-        UserPage userPage = new UserPage(true);
+        UserPage userPage = new UserPage(false);
         userPage.clickonAppointment_User();
 
         UserAppointment appointment = new UserAppointment(true);
@@ -47,6 +48,8 @@ public class Appointment_Test extends Hooks {
         appointment.sendCompanyAddress("Sky Center");
         appointment.sendCompanyTaxCode("0303963259526");
         appointment.clickonPaymentAppointment();
+        Payment payment = new Payment(false);
+        payment.clickPayment("4111-1111-1111-1111","Vu Thuy My","05","25","787");
         id = appointment.getIDAppointment();
     }
 
@@ -81,14 +84,14 @@ public class Appointment_Test extends Hooks {
         loginPage.login("0963259526", "123456");
         loginPage.waitForPageLoadComplete();
 
-        UserPage userPage = new UserPage(true);
+        UserPage userPage = new UserPage(false);
         userPage.clickonAppointment_User();
 
         UserAppointment appointment = new UserAppointment(true);
         appointment.clickonCreateAppointment();
-        appointment.selectAccount("RTuCon");
+        appointment.selectAccount("Nam con (Con)");
         appointment.selectHospitalClinic("BỆNH VIỆN TRƯNG VƯƠNG");
-        appointment.selectServices("Tái khám","Gây mê hồi sức","","26/01/2023","","");
+        appointment.selectServices("Tái khám","Gây mê","","26/01/2023","","");
         appointment.selectSession("Buổi sáng, 07h30-11h30");
         appointment.sendPhoneNumber("18001668");
         appointment.clickonBillingInfoTax();
@@ -96,6 +99,8 @@ public class Appointment_Test extends Hooks {
         appointment.sendCompanyAddress("Sky Center");
         appointment.sendCompanyTaxCode("0303963259526");
         appointment.clickonPaymentAppointment();
+        Payment payment = new Payment(false);
+        payment.clickPayment("4111-1111-1111-1111","Vu Thuy My","05","25","787");
         id = appointment.getIDAppointment();
     }
 

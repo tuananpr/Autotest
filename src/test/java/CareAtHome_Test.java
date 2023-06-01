@@ -1,5 +1,5 @@
 import Core.Support.General.Hooks;
-import GlobeDr.Pages.CareAtHome.User.*;
+import GlobeDr.Pages.CareAtHome.*;
 import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
 import GlobeDr.Pages.Pages.UserPage;

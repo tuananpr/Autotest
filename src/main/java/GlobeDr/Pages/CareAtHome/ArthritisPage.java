@@ -1,4 +1,4 @@
-package GlobeDr.Pages.CareAtHome.User;
+package GlobeDr.Pages.CareAtHome;
 
 import Core.Selenium.Button;
 import Core.Selenium.FileUploader;

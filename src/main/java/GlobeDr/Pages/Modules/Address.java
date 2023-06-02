@@ -1,6 +1,8 @@
 package GlobeDr.Pages.Modules;
 
+import Core.Selenium.Label;
 import Core.Selenium.Select;
+import Core.Selenium.Textbox;
 import GlobeDr.Pages.BaseGlobeDrPage;
 import org.openqa.selenium.By;
 
@@ -14,12 +16,16 @@ public class Address extends BaseGlobeDrPage {
     private final String xpath_City = "//label[@translate='city']/preceding-sibling::select";
     private final String xpath_District = "//label[@translate='district']/preceding-sibling::select";
     private final String xpath_Ward = "//label[@translate='ward']/preceding-sibling::select";
+    private final String xpath_textbox_Address = "//label[@translate='address']/preceding-sibling::input";
+    private final String xpath_button_ConfirmAddress = "//div[@class='pac-container pac-logo']";
     //elements
 
     private final Select select_Country = new Select(By.xpath(xpath_Country),"select_Country");
     private final Select select_City = new Select(By.xpath(xpath_City),"select_City");
     private final Select select_District = new Select(By.xpath(xpath_District),"select_District");
     private final Select select_Ward = new Select(By.xpath(xpath_Ward),"select_Ward");
+    private final Textbox textbox_Address = new Textbox(By.xpath(xpath_textbox_Address),"textboxAddress");
+    private final Label label_ConfirmAddress = new Label(By.xpath(xpath_button_ConfirmAddress),"labelAddress");
     //contructor
     public Address(boolean assertOpen) {
         super(by,name,assertOpen);
@@ -37,5 +43,12 @@ public class Address extends BaseGlobeDrPage {
         waitForJSToComplete();
         select_Ward.waitForElementToBeDisplay();
         select_Ward.selectByContains(Ward);
+    }
+
+    public void send_Address(String Address){
+        textbox_Address.waitForElementToBeDisplay();
+        textbox_Address.sendClearText(Address);
+        label_ConfirmAddress.waitForElementToBeDisplay();
+        label_ConfirmAddress.click();
     }
 }

@@ -1,6 +1,9 @@
 package GlobeDr.Pages.Account;
 
-import Core.Selenium.*;
+import Core.Selenium.Button;
+import Core.Selenium.FileUploader;
+import Core.Selenium.Select;
+import Core.Selenium.Textbox;
 import GlobeDr.Pages.BaseGlobeDrPage;
 import GlobeDr.Pages.Modules.Calendar;
 import org.openqa.selenium.By;
@@ -16,11 +19,11 @@ public class UserUpdateInfoPage extends BaseGlobeDrPage {
     private final String xpath_textbox_Email = "//label[@translate='email']/preceding-sibling::input";
     private final String xpath_textbox_PhoneNumber = "//label[@translate='phoneNumber']/preceding-sibling::input";
     private final String xpath_textbox_WorkPhone = "//label[@translate='workPhone']/preceding-sibling::input";
-    private final String xpath_textbox_Address = "//label[@translate='address']/preceding-sibling::input";
+
     private final String xpath_button_AvatarImageSuccess = "//button[contains(@class,'btn-success')]";
     private final String xpath_button_EditData = "//a[@translate='editData']";
     private final String xpath_button_Calendar = "//span[contains(@class,'calendar')]";
-    private final String xpath_button_ConfirmAddress = "//div[@class='pac-container pac-logo']";
+
     private final String xpath_button_Save = "//a[@translate='save']";
     private final String xpath_select_Gender = "//label[@translate='gender']/preceding::select";
     private final String xpath_select_MeasurementUnit = "//label[@translate='measurementUnit']/preceding-sibling::select";
@@ -43,13 +46,13 @@ public class UserUpdateInfoPage extends BaseGlobeDrPage {
     private final Select select_City = new Select(By.xpath(xpath_select_City),"SelectCity");
     private final Select select_District = new Select(By.xpath(xpath_select_District),"SelectDistrict");
     private final Select select_Ward = new Select(By.xpath(xpath_select_Ward),"SelectWard");
-    private final Textbox textbox_Address = new Textbox(By.xpath(xpath_textbox_Address),"textboxAddress");
+
     private final Textbox textbox_Name = new Textbox(By.xpath(xpath_textbox_Name),"textboxName");
     private final Textbox textbox_Title = new Textbox(By.xpath(xpath_textbox_Title),"textboxTitle");
     private final Textbox textbox_Email = new Textbox(By.xpath(xpath_textbox_Email),"textboxEmail");
     private final Textbox textbox_PhoneNumber = new Textbox(By.xpath(xpath_textbox_PhoneNumber),"textboxPhoneNumber");
     private final Textbox textbox_WorkPhone = new Textbox(By.xpath(xpath_textbox_WorkPhone),"textboxWorkPhone");
-    private final Label label_ConfirmAddress = new Label(By.xpath(xpath_button_ConfirmAddress),"labelAddress");
+
 
 
     //contructor
@@ -135,12 +138,7 @@ public class UserUpdateInfoPage extends BaseGlobeDrPage {
         select_Ward.selectByVisibleText(Ward);
     }
 
-    public void send_Address(String Address){
-        textbox_Address.waitForElementToBeDisplay();
-        textbox_Address.sendClearText(Address);
-        label_ConfirmAddress.waitForElementToBeDisplay();
-        label_ConfirmAddress.click();
-    }
+
 
     public void clickon_Save(){
         button_Save.waitForClickable();

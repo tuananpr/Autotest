@@ -3,6 +3,7 @@ import GlobeDr.Pages.Account.ManageFamilyMember;
 import GlobeDr.Pages.Account.UserUpdateInfoPage;
 import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
+import GlobeDr.Pages.Modules.Address;
 import GlobeDr.Pages.Pages.UserPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -37,6 +38,7 @@ public class Account_Test extends Hooks {
         userPage.clickon_ManageMember_User();
 
         UserUpdateInfoPage User_UpdateInfoPage = new UserUpdateInfoPage(true);
+        Address address = new Address(false);
         User_UpdateInfoPage.clickon_EditData();
         User_UpdateInfoPage.send_Name("Nam");
         User_UpdateInfoPage.send_Title("Ngô");
@@ -52,7 +54,7 @@ public class Account_Test extends Hooks {
         User_UpdateInfoPage.select_City("Thành phố Hồ Chí Minh");
         User_UpdateInfoPage.select_District("Quận Tân Bình");
         User_UpdateInfoPage.select_Ward("Phường 10");
-        User_UpdateInfoPage.send_Address("5B Đ. P. Quang, Phường 2, Tân Bình, Thành phố Hồ Chí Minh");
+        address.send_Address("5B Đ. P. Quang, Phường 2, Tân Bình, Thành phố Hồ Chí Minh");
         User_UpdateInfoPage.clickon_Save();
         Assert.assertTrue(UserUpdateInfoPage.getToastMessage().contains("Thành công"),"Thành công");
         Thread.sleep(3000);

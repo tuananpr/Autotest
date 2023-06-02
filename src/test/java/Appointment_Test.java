@@ -1,4 +1,5 @@
 import Core.Support.General.Hooks;
+import GlobeDr.Pages.Account.SelectAccount;
 import GlobeDr.Pages.Appointment.OrgAppointment;
 import GlobeDr.Pages.Appointment.UserAppointment;
 import GlobeDr.Pages.HomePage;
@@ -38,8 +39,9 @@ public class Appointment_Test extends Hooks {
         userPage.clickonAppointment_User();
 
         UserAppointment appointment = new UserAppointment(true);
+        SelectAccount selectAccount = new SelectAccount(false);
         appointment.clickonCreateAppointment();
-        appointment.selectAccount("Nam");
+        selectAccount.selectAccount("Nam");
         appointment.selectHospitalClinic("BỆNH VIỆN TRƯNG VƯƠNG");
         appointment.selectServices("Khám lần đầu","","T2","","Buổi chiều","BS Tâm");
         appointment.sendPhoneNumber("18001668");
@@ -89,8 +91,9 @@ public class Appointment_Test extends Hooks {
         userPage.clickonAppointment_User();
 
         UserAppointment appointment = new UserAppointment(true);
+        SelectAccount selectAccount = new SelectAccount(false);
         appointment.clickonCreateAppointment();
-        appointment.selectAccount("Nam con (Con)");
+        selectAccount.selectAccount("Nam con (Con)");
         appointment.selectHospitalClinic("BỆNH VIỆN TRƯNG VƯƠNG");
         appointment.selectServices("Tái khám","Gây mê","","26/01/2023","","");
         appointment.selectSession("Buổi sáng, 07h30-11h30");

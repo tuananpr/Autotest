@@ -12,8 +12,10 @@ public class SelectAccount extends BaseGlobeDrPage {
     //locators
     public final String xpath_SelectAccount = "//div[@class='mr-auto']";
     private final String xpath_ButtonConfirmService = "//div/button[@translate='confirmService']";
+    private final String xpath_ConfirmInformationAccount = "//button[@translate='confirmService']";
     //elements
     private final Button buttonConfirmService = new Button(By.xpath(xpath_ButtonConfirmService),"btnConfirmService");
+    private final Button buttonConfirmInformationAccount = new Button(By.xpath(xpath_ConfirmInformationAccount),"btnConfirmInformationAccount");
     //contructor
     public SelectAccount(boolean assertOpen) {super(by,name,assertOpen);}
 
@@ -33,5 +35,10 @@ public class SelectAccount extends BaseGlobeDrPage {
             }
         }
         clickonConfirmService();
+    }
+
+    public void clickonConfirmInformationAccount(){
+        buttonConfirmInformationAccount.waitForClickable();
+        buttonConfirmInformationAccount.click();
     }
 }

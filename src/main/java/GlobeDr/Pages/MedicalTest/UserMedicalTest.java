@@ -66,7 +66,5 @@ public class UserMedicalTest extends BaseGlobeDrPage {
         waitForJSToComplete();
     }
 
-    public void selectGroupTest(String Name){
-        ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_SelectGroupTest),"listGroupTest")
-    }
+
 }

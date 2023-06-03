@@ -64,6 +64,7 @@ public class UserMedicalTest extends BaseGlobeDrPage {
         textboxSearchMedicalTest.waitForElementToBePresent();
         textboxSearchMedicalTest.sendText(Name);
         waitForJSToComplete();
+
     }
 
 

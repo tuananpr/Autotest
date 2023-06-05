@@ -34,7 +34,7 @@ public class SelectAccount extends BaseGlobeDrPage {
                 waitForJSToComplete();
             }
         }
-        clickonConfirmService();
+        clickonConfirmInformationAccount();
     }
 
     public void clickonConfirmInformationAccount(){

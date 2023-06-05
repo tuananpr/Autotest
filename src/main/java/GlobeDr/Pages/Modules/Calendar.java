@@ -11,8 +11,9 @@ public class Calendar extends BaseGlobeDrPage {
     private static final String name = "Calendar module";
 
     //locators
-    private final String xpath_buttonChooseMonthAndYear = "//button[@aria-label='Choose month and year']";
-    private final String xpath_labelSelectedYear = "//div/button[@aria-label='Change to month view']/span[contains(@class,'button-content')]";
+    private final String xpath_buttonChooseMonthAndYear = "//div[@class='ui-datepicker']/span/span";
+    private final String xpath_labelSelectedYear = "//div/button[@aria-label='Choose month and year']/span[contains(@class,'button-content')]";
+    private final String xpath_labelYear = "//div/button[@aria-label='Change to month view']/span[contains(@class,'button-content')]";
     private final String xpath_listYear = "//table[@class='owl-dt-calendar-table owl-dt-calendar-multi-year-table']/tbody/tr/td";
     private final String xpath_buttonPrevious = "//button[@aria-label='Previous 21 years']";
     private final String xpath_buttonNext = "//button[@aria-label='Next 21 years']";
@@ -24,6 +25,7 @@ public class Calendar extends BaseGlobeDrPage {
     //elements
     private final Button buttonChooseMonthAndYear = new Button(By.xpath(xpath_buttonChooseMonthAndYear), "Choosemonthandyear");
     private final Label labelSelectedYear = new Label(By.xpath(xpath_labelSelectedYear),"TitleSelectedYear");
+    private final Label labelYear = new Label(By.xpath(xpath_labelYear),"labelYear");
     private final ListOfElements listYear = new ListOfElements(By.xpath(xpath_listYear), "ListYear");
     private final Button buttonPrevious = new Button(By.xpath(xpath_buttonPrevious),"ButtonPrevious");
     private final Button buttonNext = new Button(By.xpath(xpath_buttonNext),"ButtonNext");
@@ -50,8 +52,8 @@ public class Calendar extends BaseGlobeDrPage {
             throw new RuntimeException(e);
         }
         buttonChooseMonthAndYear.click();
-        waitForJSToComplete();
-
+        waitForLoadingComplete();
+        labelSelectedYear.click();
         selectYear(year);
         selectMonth(month);
         selectDay(day);
@@ -64,7 +66,7 @@ public class Calendar extends BaseGlobeDrPage {
     public void selectYear(String year) {
         String yearPrecentText;
         do {
-            yearPrecentText = labelSelectedYear.getText();
+            yearPrecentText = labelYear.getText();
             int firstYearList = Integer.parseInt(listYear.getListOfElement().get(0).getText());
             int lastYearList = Integer.parseInt(listYear.getListOfElement().get((listYear.getNumberOfElement()) - 1).getText());
             if (Integer.parseInt(year) < firstYearList) {
@@ -78,7 +80,7 @@ public class Calendar extends BaseGlobeDrPage {
                     if (listYear.getListOfElement().get(i).getText().equalsIgnoreCase(year)){
                         listYear.getListOfElement().get(i).click();
                         waitForJSToComplete();
-                        yearPrecentText = labelSelectedYear.getText();
+                        yearPrecentText = labelYear.getText();
                         break;
                     }
                 }

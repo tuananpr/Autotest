@@ -17,6 +17,7 @@ public class UserPage extends BaseGlobeDrPage {
     private final String xpath_ManageFamilyMember_User = "//p[@translate='manageFamilyMember']";
     private final String xpath_Appointment_User = "//a[@href='/appointment']/div/img";
     private final String xpath_List_User = "//div[@class='align-self-center']/p[contains(@class,'fs')]";
+    private final String xpath_MedicalTest = "//app-home-user//a[@href='/medical-test']//img";
     //elements
 
     private final Button button_RCE_User = new Button(By.xpath(xpath_RCE_User),"btnRCEUser");
@@ -24,6 +25,7 @@ public class UserPage extends BaseGlobeDrPage {
     private final Button button_Name_User = new Button(By.xpath(xpath_buttonName_User),"btnNameUser");
     private final Button button_ManageMember_User = new Button(By.xpath(xpath_ManageFamilyMember_User),"btnManageFamilyMember");
     private final Button button_Appointment_User = new Button(By.xpath(xpath_Appointment_User),"btnAppointmentUser");
+    private final Button buttonMedicalTest = new Button(By.xpath(xpath_MedicalTest),"btnMedicalTest");
     //contructor
     public UserPage (boolean assertOpent) {super(by,name,assertOpent);}
 
@@ -68,5 +70,9 @@ public class UserPage extends BaseGlobeDrPage {
         waitForLoadingComplete();
     }
 
+    public void clickonMedicalTest(){
+        buttonMedicalTest.waitForClickable();
+        buttonMedicalTest.click();
+    }
 
 }

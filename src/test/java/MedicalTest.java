@@ -18,6 +18,7 @@ public class MedicalTest extends Hooks {
 //    public void tearDown(){
 //        after();
 //    }
+    //User
     String UserID = "0963259524";
     String UserPassWord = "123456";
     String AccountName = "Tuan24";
@@ -25,6 +26,12 @@ public class MedicalTest extends Hooks {
     String MethodSampleTest = "Tại phòng xét nghiệm";
     String DateOrderMedicalTest = "10/07/2023" ;
     String GroupTest = "GÓI XÉT NGHIỆM";
+    String NameTest = "Đường Ngẫu Nhiên";
+    String ID;
+
+    ///OrgMedicalTest_Diag
+    String OrgID = "0963259521";
+    String OrgPassWord = "123456";
 
     @Test (priority = 1)
     public void UserOrderMedicalTestAtlab() throws InterruptedException {
@@ -48,7 +55,24 @@ public class MedicalTest extends Hooks {
         userMedicalTest.selectMethodSampleTest(MethodSampleTest);
         calendar.selectDate(DateOrderMedicalTest);
         userMedicalTest.clickonSelectATestType();
-        userMedicalTest.selectGroupTest(GroupTest);
-        userMedicalTest.sendNameMedicalTest("Điện Não Đồ");
+        userMedicalTest.sendNameMedicalTest(NameTest);
+        userMedicalTest.clickonView_ConfirmSelectedMedicalTest();
+        ID = userMedicalTest.getIDOrderMedicalTest();
     }
+
+//    @Test(priority = 2)
+//    public void OrgAssignSamplingStaff() throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.waitForPageLoadComplete();
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login(OrgID,OrgPassWord);
+//        loginPage.waitForPageLoadComplete();
+//
+//        OrgPage orgPage = new OrgPage(false);
+//        orgPage.clickonMedicalTestOrder();
+//        OrgMedicalTest orgMedicalTest = new OrgMedicalTest(false);
+//        orgMedicalTest.SearchMedicalTestByID(ID);
+//    }
 }

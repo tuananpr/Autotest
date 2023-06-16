@@ -1,4 +1,5 @@
 import Core.Support.General.Hooks;
+import GlobeDr.Pages.Account.DataProviderFactory;
 import GlobeDr.Pages.Account.ManageFamilyMember;
 import GlobeDr.Pages.Account.UserUpdateInfoPage;
 import GlobeDr.Pages.HomePage;
@@ -24,14 +25,30 @@ public class Account_Test extends Hooks {
     String userID = "0987654328";
     String pass = "123456";
 
-    @Test (priority = 1)
-    public void MainAccountUpdateInfo() throws InterruptedException {
+    @Test (priority = 1, dataProvider = "user_MainAccountUpdateInfo", dataProviderClass = DataProviderFactory.class)
+    public void MainAccountUpdateInfo(String userID,
+                                      String userPassword,
+                                      String name,
+                                      String title,
+                                      String avatarImage,
+                                      String email,
+                                      String dayOfBirth,
+                                      String gender,
+                                      String phoneNumber,
+                                      String workPhoneNumber,
+                                      String measurementUnit,
+                                      String visitCountry,
+                                      String country,
+                                      String city,
+                                      String district,
+                                      String ward,
+                                      String userAddress) throws InterruptedException {
         HomePage homePage = new HomePage(true);
         homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
 
         LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID, pass);
+        loginPage.login(userID, userPassword);
         loginPage.waitForPageLoadComplete();
 
         UserPage userPage = new UserPage(false);
@@ -40,8 +57,8 @@ public class Account_Test extends Hooks {
         UserUpdateInfoPage User_UpdateInfoPage = new UserUpdateInfoPage(true);
         Address address = new Address(false);
         User_UpdateInfoPage.clickon_EditData();
-        User_UpdateInfoPage.send_Name("Nam");
-        User_UpdateInfoPage.send_Title("Ngô");
+        User_UpdateInfoPage.send_Name(name);
+        User_UpdateInfoPage.send_Title(title);
         User_UpdateInfoPage.send_AvatarImage("Wolverine.PNG");
         User_UpdateInfoPage.send_Email("ngonam@demo.globedr.com");
         User_UpdateInfoPage.clickon_DayofBirth("16/12/1990");

@@ -13,6 +13,7 @@ public abstract class BaseGlobeDrPage extends BasePage {
     private final String xpath_toolTip = "//div[@class='tooltip BR']";
 
 
+
     // elements
     private final Label loading = new Label(By.xpath(xpath_circleLoading), "Loading");
     private final Label labelThundraSnackBarError = new Label(By.xpath(xpath_thundraTraceSnackBarError), "Thundra Error");

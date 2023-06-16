@@ -32,6 +32,7 @@ public class LoginPage extends BaseGlobeDrPage {
         textBoxPassWord.sendClearText(password);
         Thread.sleep(2000);
         this.clickOnSignInButton();
+        waitForLoadingComplete();
     }
 
     public void clickOnSignInButton() {

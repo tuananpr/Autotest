@@ -18,6 +18,7 @@ public class UserPage extends BaseGlobeDrPage {
     private final String xpath_Appointment_User = "//a[@href='/appointment']/div/img";
     private final String xpath_List_User = "//div[@class='align-self-center']/p[contains(@class,'fs')]";
     private final String xpath_MedicalTest = "//app-home-user//a[@href='/medical-test']//img";
+    private final String xpath_List_Feature = "//app-home-user//a//p[@class='text-nowrap']";
     //elements
 
     private final Button button_RCE_User = new Button(By.xpath(xpath_RCE_User),"btnRCEUser");
@@ -75,4 +76,13 @@ public class UserPage extends BaseGlobeDrPage {
         buttonMedicalTest.click();
     }
 
+    public void selectFeature(String feature){
+        ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_List_Feature),"listFeature");
+        for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
+            if(listOfElements.getElement(i).getText().contains(feature)){
+                listOfElements.getElement(i).click();
+                waitForPageLoadComplete();
+            }
+        }
+    }
 }

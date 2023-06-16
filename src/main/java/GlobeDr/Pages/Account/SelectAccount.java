@@ -26,7 +26,6 @@ public class SelectAccount extends BaseGlobeDrPage {
     }
     public void selectAccount(String Account){
         waitForLoadingComplete();
-//        clickonAccount();
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_SelectAccount),"SelectAccount");
         for (int i = 0; i< listOfElements.getNumberOfElement() ; i++){
             if (listOfElements.getElement(i).getText().contains(Account)){

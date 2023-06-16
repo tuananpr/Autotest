@@ -60,8 +60,6 @@ public class OrgPage extends BaseGlobeDrPage {
                     listOfElements.getElement(i).click();
                 }
             }
-
-
         } else {
             buttonChangeOrg.waitForClickable();
             buttonChangeOrg.click();

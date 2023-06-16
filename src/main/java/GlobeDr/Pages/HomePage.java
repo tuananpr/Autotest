@@ -19,6 +19,7 @@ public class HomePage extends BaseGlobeDrPage {
     }
 
     public void clickon_LoginButton() {
+        waitForPageLoadComplete();
         buttonLogin.waitForClickable();
         buttonLogin.click();
     }

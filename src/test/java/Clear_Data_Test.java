@@ -1,9 +1,13 @@
 import Core.Support.General.Hooks;
 import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
+import GlobeDr.Pages.MedicalTest.OrgMedicalTest;
 import GlobeDr.Pages.Pages.OrgPage;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Clear_Data_Test extends Hooks {
     @BeforeTest
@@ -55,9 +59,8 @@ public class Clear_Data_Test extends Hooks {
 //        LoginPage loginPage = new LoginPage(true);
 //        loginPage.login("0969617267", "123456");
 //
-//        UserPage userPage = new UserPage(true);
-//        userPage.waitForPageLoadComplete();
-//        userPage.clickonRCE_User();
+//        OrgPage orgPage = new OrgPage(false);
+//        orgPage.selectManagement("Quản lý bệnh viện/phòng khám","Diag","Danh sách xét nghiệm");
 //
 //        RCEPersonalPage rcePersonalPage = new RCEPersonalPage(true);
 //        rcePersonalPage.waitForPageLoadComplete();
@@ -66,6 +69,11 @@ public class Clear_Data_Test extends Hooks {
 
     @Test
     public void Clear_Data_MedicalTest() throws InterruptedException{
+        List<String> status = new ArrayList<>();
+        status.add("MỚI");
+        status.add("BÁC SĨ ĐÃ CHỈ ĐỊNH");
+
+
         HomePage homePage = new HomePage(true);
         homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
@@ -75,6 +83,7 @@ public class Clear_Data_Test extends Hooks {
 
         OrgPage orgPage = new OrgPage(false);
         orgPage.selectManagement("Quản lý bệnh viện/phòng khám","Diag","Danh sách xét nghiệm");
-
+        OrgMedicalTest orgMedicalTest = new OrgMedicalTest(false);
+        orgMedicalTest.clickonCancelOrderMedical(status);
     }
 }

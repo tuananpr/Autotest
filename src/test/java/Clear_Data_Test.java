@@ -3,6 +3,7 @@ import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
 import GlobeDr.Pages.MedicalTest.OrgMedicalTest;
 import GlobeDr.Pages.Pages.OrgPage;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,10 +17,10 @@ public class Clear_Data_Test extends Hooks {
         beforeWeb();
     }
 
-//    @AfterMethod
-//    public void tearDown(){
-//        after();
-//    }
+    @AfterMethod
+    public void tearDown(){
+        after();
+    }
 
 //    @Test
 //    public void Clear_Data_Consultant() throws InterruptedException {

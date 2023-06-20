@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<suite name = "Medical Test">
+    <test name="UserOrderMedicalTestAtlab">
+        <classes>
+            <class name="Medical_Test"/>
+            <methods>
+                <exclue name = "OrgAssignSamplingStaff">
+                </exclue>
+            </methods>
+        </classes>
+    </test>
+
+    <test name="OrgAssignSamplingStaff">
+        <classes>
+            <class name="Medical_Test"/>
+            <methods>
+                <exclue name = "UserOrderMedicalTestAtlab">
+                </exclue>
+            </methods>
+        </classes>
+    </test>
+</suite>

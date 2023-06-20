@@ -3,6 +3,7 @@ package GlobeDr.Pages.MedicalTest;
 import Core.Selenium.*;
 import GlobeDr.Pages.BaseGlobeDrPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 public class UserMedicalTest extends BaseGlobeDrPage {
     private final static By by = By.xpath("");
@@ -21,7 +22,7 @@ public class UserMedicalTest extends BaseGlobeDrPage {
     private final String xpath_ViewTestsSelected = "//fieldset//div/p/span[@translate='selectedMedicalTestWithParam']";
     private final String xpath_ConfirmSelectedMedicalTest = "//app-view-selected-product-modal//button[contains(@class,'btn-success')]";
     private final String xpath_ID = "(//app-medical-test-detail-model//div[contains(@class,'mw')]/following-sibling::div[1])";
-    private final String xpath_StatusMedical = "(//app-medical-test-detail-model/div/div/div/p[1])";
+    private static final String xpath_StatusMedical = "(//app-medical-test-detail-model/div/div/div/p[0])";
     //elements
 
     private final Button buttonOrderMedicalTest = new Button(By.xpath(xpath_OrderMedicalTest),"btnOrderMedicalTest");
@@ -34,7 +35,7 @@ public class UserMedicalTest extends BaseGlobeDrPage {
     private final Button buttonViewTestsSelected = new Button(By.xpath(xpath_ViewTestsSelected),"btnViewTestsSelected");
     private final Button buttonConfirmSelectedMedicalTest = new Button(By.xpath(xpath_ConfirmSelectedMedicalTest),"btnConfirmSelectedMedicalTest");
     private final Label labelIDMedicalTest = new Label(By.xpath(xpath_ID),"labelIDMedicalTest");
-    private final Label labelStatusMedical = new Label(By.xpath(xpath_StatusMedical),"labelStatusMedical");
+    private static final Label labelStatusMedical = new Label(By.xpath(xpath_StatusMedical),"labelStatusMedical");
     //contructor
     public UserMedicalTest(Boolean assertOpen) {super(by,name,assertOpen);}
 
@@ -83,6 +84,7 @@ public class UserMedicalTest extends BaseGlobeDrPage {
     public void sendNameMedicalTest(String Name) throws InterruptedException {
         textboxSearchMedicalTest.waitForElementToBePresent();
         textboxSearchMedicalTest.sendText(Name);
+        textboxSearchMedicalTest.sendKey(Keys.ENTER);
         waitForJSToComplete();
         selectTest(Name);
     }
@@ -92,10 +94,11 @@ public class UserMedicalTest extends BaseGlobeDrPage {
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_listMedicalTest), "listMedicalTest");
         for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
             if(listOfElements.getElement(i).getText().contains(NameTest)){
-                System.out.println("NameTest " + listOfElements.getElement(i).getText());
+                System.out.println("NameTest: " + listOfElements.getElement(i).getText());
                 listOfElements.getElement(i).click();
             }
         }
+        waitForJSToComplete();
         buttonChoose.waitForClickable();
         buttonChoose.click();
         waitForJSToComplete();
@@ -120,7 +123,13 @@ public class UserMedicalTest extends BaseGlobeDrPage {
 
     public String getIDOrderMedicalTest(){
         String ID = labelIDMedicalTest.getText().substring(1);
-        System.out.println("OrderID " + ID);
+        System.out.println("OrderID: " + ID);
         return ID;
+    }
+
+    public static String getStatus(){
+        labelStatusMedical.waitForElementToBeDisplay();
+        labelStatusMedical.getText();
+        return labelStatusMedical.getText();
     }
 }

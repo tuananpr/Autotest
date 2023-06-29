@@ -27,6 +27,7 @@ public class LoginPage extends BaseGlobeDrPage {
     }
 
     public void login(String username, String password) throws InterruptedException {
+        waitForLoadingComplete();
         textBoxUsername.waitForElementToBeDisplay();
         textBoxUsername.sendClearText(username);
         textBoxPassWord.sendClearText(password);

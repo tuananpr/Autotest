@@ -16,7 +16,7 @@ public class Address extends BaseGlobeDrPage {
     private final String xpath_City = "//label[@translate='city']/preceding-sibling::select";
     private final String xpath_District = "//label[@translate='district']/preceding-sibling::select";
     private final String xpath_Ward = "//label[@translate='ward']/preceding-sibling::select";
-    private final String xpath_textbox_Address = "//label[@translate='address']/preceding-sibling::input";
+    private final String xpath_textbox_Address = "//app-user//input[@id='address']";
     private final String xpath_button_ConfirmAddress = "//div[@class='pac-container pac-logo']";
     //elements
 
@@ -32,23 +32,26 @@ public class Address extends BaseGlobeDrPage {
     }
 
     public void select_Address(String Country, String City, String District, String Ward){
-        select_Country.waitForElementToBeDisplay();
-        select_Country.selectByContains(Country);
+        select_Country.waitForElementToBeEnabled();
+        select_Country.click();
+        select_Country.selectByVisibleText(Country);
         waitForJSToComplete();
-        select_City.waitForElementToBeDisplay();
-        select_City.selectByContains(City);
+        select_City.waitForElementToBeEnabled();
+        select_City.click();
+        select_City.selectByVisibleText(City);
         waitForJSToComplete();
-        select_District.waitForElementToBeDisplay();
-        select_District.selectByContains(District);
+        select_District.waitForElementToBeEnabled();
+        select_District.click();
+        select_District.selectByVisibleText(District);
         waitForJSToComplete();
-        select_Ward.waitForElementToBeDisplay();
-        select_Ward.selectByContains(Ward);
+        select_Ward.waitForElementToBeEnabled();
+        select_Ward.click();
+        select_Ward.selectByVisibleText(Ward);
     }
 
     public void send_Address(String Address){
         textbox_Address.waitForElementToBeDisplay();
         textbox_Address.sendClearText(Address);
-        label_ConfirmAddress.waitForElementToBeDisplay();
-        label_ConfirmAddress.click();
+        waitForJSToComplete();
     }
 }

@@ -1,14 +1,15 @@
 import Core.Support.General.Hooks;
+import GlobeDr.Pages.Account.DataProviderFactory;
 import GlobeDr.Pages.Account.ManageFamilyMember;
-import GlobeDr.Pages.Account.UserUpdateInfoPage;
 import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
-import GlobeDr.Pages.Modules.Address;
 import GlobeDr.Pages.Pages.UserPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
 
 public class Account_Test extends Hooks {
     @BeforeMethod
@@ -21,190 +22,179 @@ public class Account_Test extends Hooks {
     public void tearDown() {
         after();
     }
-    String userID = "0987654328";
-    String pass = "123456";
 
-    @Test (priority = 1)
-    public void MainAccountUpdateInfo() throws InterruptedException {
+//    @Test (priority = 1, dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+//    public void MainAccountUpdateInfo(HashMap<String, String> data) throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login(data.get("ID"),data.get("Pass"));
+//
+//
+//        UserPage userPage = new UserPage(false);
+//        userPage.clickon_ManageMember_User();
+//
+//        UserUpdateInfoPage User_UpdateInfoPage = new UserUpdateInfoPage(true);
+//        User_UpdateInfoPage.clickon_EditData();
+//        User_UpdateInfoPage.send_Name(data.get("Name"));
+//        User_UpdateInfoPage.send_Title(data.get("Title"));
+//        User_UpdateInfoPage.send_AvatarImage(data.get("AvatarImage"));
+//        User_UpdateInfoPage.send_Email(data.get("Email"));
+//        User_UpdateInfoPage.clickon_DayofBirth(data.get("DOB"));
+//        User_UpdateInfoPage.select_Gender(data.get("Gender"));
+//        User_UpdateInfoPage.send_PhoneNumber(data.get("PhoneNumber"));
+//        User_UpdateInfoPage.send_WorkPhoneNumber(data.get("WorkPhoneNumber"));
+//        User_UpdateInfoPage.select_MeasurementUnit(data.get("MeasurementUnit"));
+//        User_UpdateInfoPage.select_VisitCountry(data.get("Country"));
+//        User_UpdateInfoPage.select_Country(data.get("Country"));
+//        User_UpdateInfoPage.select_City(data.get("City"));
+//        User_UpdateInfoPage.select_District(data.get("District"));
+//        User_UpdateInfoPage.select_Ward(data.get("Ward"));
+//        User_UpdateInfoPage.send_Address(data.get("Address"));
+//        User_UpdateInfoPage.clickon_Save();
+//        Assert.assertTrue(UserUpdateInfoPage.getToastMessage().contains("Thành công"),"Thành công");
+//        Thread.sleep(5000);
+//        System.out.println("MainAccountUpdateInfo" + UserUpdateInfoPage.getToastMessage());
+//    }
+//
+//    @Test (priority = 2, dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+//    public void ShareMainAccount(HashMap<String, String> data) throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(false);
+//        loginPage.login(data.get("ID"), data.get("Pass"));
+//
+//        UserPage userPage = new UserPage(false);
+//        userPage.clickon_ManageMember_User();
+//
+//        ManageFamilyMember manageFamilyMember = new ManageFamilyMember(false);
+//        manageFamilyMember.clickon_ShareAccount(data.get("MainAccount"));
+//        manageFamilyMember.share_Method(data.get("ShareMethod_View"));
+//        Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
+//        Thread.sleep(5000);
+//        System.out.println("ShareMainAccount" + ManageFamilyMember.getToastMessage());
+//    }
+//
+//    @Test (priority = 3,dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+//    public void EditShare_MainAccount(HashMap<String, String>data) throws InterruptedException{
+//        HomePage homePage = new HomePage(true);
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login(data.get("ID"), data.get("Pass"));
+//
+//        UserPage userPage = new UserPage(false);
+//        userPage.clickon_ManageMember_User();
+//
+//        ManageFamilyMember manageFamilyMember = new ManageFamilyMember(false);
+//        manageFamilyMember.clickon_ShareAccount(data.get("MainAccount"));
+//        manageFamilyMember.share_Method(data.get("ShareMethod_View&Edit"));
+//        Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
+//        Thread.sleep(5000);
+//        System.out.println("ShareMainAccount" + ManageFamilyMember.getToastMessage());
+//    }
+//
+//    @Test (priority = 4, dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+//    public void StopShare(HashMap<String, String>data) throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login(data.get("ID"), data.get("Pass"));
+//
+//        UserPage userPage = new UserPage(false);
+//        userPage.clickon_ManageMember_User();
+//
+//        ManageFamilyMember manageFamilyMember = new ManageFamilyMember(false);
+//        manageFamilyMember.clickon_ShareAccount(data.get("MainAccount"));
+//        manageFamilyMember.share_Method(data.get("ShareMethod_Unshare"));
+//        Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
+//        Thread.sleep(5000);
+//        System.out.println("ShareMainAccount" + ManageFamilyMember.getToastMessage());
+//    }
+
+    @Test (priority = 5, dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+    public void CreateSubAccount(HashMap<String, String>data) throws InterruptedException {
         HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
 
         LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID,pass);
-        loginPage.waitForPageLoadComplete();
-
-        UserPage userPage = new UserPage(false);
-        userPage.clickon_ManageMember_User();
-
-        UserUpdateInfoPage User_UpdateInfoPage = new UserUpdateInfoPage(true);
-        Address address = new Address(false);
-        User_UpdateInfoPage.clickon_EditData();
-        User_UpdateInfoPage.send_Name("Tuấn");
-        User_UpdateInfoPage.send_Title("Mr");
-        User_UpdateInfoPage.send_AvatarImage("Wolverine.PNG");
-        User_UpdateInfoPage.send_Email("ngonam@demo.globedr.com");
-        User_UpdateInfoPage.clickon_DayofBirth("16/12/1990");
-        User_UpdateInfoPage.select_Gender("Nam");
-        User_UpdateInfoPage.send_PhoneNumber("0963269526");
-        User_UpdateInfoPage.send_WorkPhoneNumber("19006880");
-        User_UpdateInfoPage.select_MeasurementUnit("VN (kg/m)");
-        User_UpdateInfoPage.select_VisitCountry("Việt Nam");
-        User_UpdateInfoPage.select_Country("Việt Nam");
-        User_UpdateInfoPage.select_City("Thành phố Hồ Chí Minh");
-        User_UpdateInfoPage.select_District("Quận Tân Bình");
-        User_UpdateInfoPage.select_Ward("Phường 10");
-        address.send_Address("5B Đ. P. Quang, Phường 2, Tân Bình, Thành phố Hồ Chí Minh");
-        User_UpdateInfoPage.clickon_Save();
-        Assert.assertTrue(UserUpdateInfoPage.getToastMessage().contains("Thành công"),"Thành công");
-        Thread.sleep(3000);
-        System.out.println("MainAccountUpdateInfo" + UserUpdateInfoPage.getToastMessage());
-    }
-
-    @Test (priority = 2)
-    public void ShareMainAccount() throws InterruptedException {
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID, pass);
-        loginPage.waitForPageLoadComplete();
-
-        UserPage userPage = new UserPage(true);
-        userPage.clickon_ManageMember_User();
-
-        ManageFamilyMember manageFamilyMember = new ManageFamilyMember(true);
-        manageFamilyMember.clickon_ShareAccount("Nam");
-        manageFamilyMember.share_AccountWithUser("Tuan Postman");
-        manageFamilyMember.share_Method("Xem & chỉnh sửa");
-        Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
-        Thread.sleep(3000);
-        System.out.println("ShareMainAccount" + ManageFamilyMember.getToastMessage());
-    }
-
-    @Test (priority = 3)
-    public void EditShare_MainAccount() throws InterruptedException{
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID, pass);
-        loginPage.waitForPageLoadComplete();
-
-        UserPage userPage = new UserPage(false);
-        userPage.clickon_ManageMember_User();
-
-        ManageFamilyMember manageFamilyMember = new ManageFamilyMember(true);
-        manageFamilyMember.clickon_Edit_ShareAccount("Nam");
-        manageFamilyMember.share_Method("Chỉ xem");
-    }
-
-    @Test (priority = 4)
-    public void StopShare() throws InterruptedException {
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID, pass);
-        loginPage.waitForPageLoadComplete();
-
-        UserPage userPage = new UserPage(false);
-        userPage.clickon_ManageMember_User();
-
-        ManageFamilyMember manageFamilyMember = new ManageFamilyMember(true);
-        manageFamilyMember.clickon_Edit_ShareAccount("Nam");
-        manageFamilyMember.share_Method("Dừng chia sẻ");
-    }
-
-    @Test (priority = 5)
-    public void CreateSubAccount() throws InterruptedException {
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID,pass);
-        loginPage.waitForPageLoadComplete();
+        loginPage.login(data.get("ID"), data.get("Pass"));
 
         UserPage userPage = new UserPage(false);
         userPage.clickon_ManageMember_User();
 
         ManageFamilyMember manageFamilyMember = new ManageFamilyMember(true);
         manageFamilyMember.clickon_SubAccountNew();
-        manageFamilyMember.send_InsuranceCode("GD02356525989");
-        manageFamilyMember.send_CMND_CCCD("555555");
-        manageFamilyMember.send_Fullname("Ngô Sắn Khoai");
-        manageFamilyMember.fileuploader_AvatarImage("BlackWidow.PNG");
-        manageFamilyMember.send_DayofBirth("10/10/2020");
-        manageFamilyMember.send_PhoneNumber("090900000");
-        manageFamilyMember.select_Gender("Nữ");
-        manageFamilyMember.send_Address("100 Trần Công An, Thành phố Biên Hòa, Đồng Nai, Việt Nam",
-                                        "Việt Nam",
-                                        "Thành phố Hồ Chí Minh",
-                                        "Quận Tân Bình",
-                                        "Phường 02");
-        manageFamilyMember.send_Hight("180");
-        manageFamilyMember.send_Weight("60");
-        manageFamilyMember.select_Relationship("Con");
+        manageFamilyMember.send_InsuranceCode(data.get("InsuranceCode"));
+        manageFamilyMember.send_CMND_CCCD(data.get("CMND_CCCD"));
+        manageFamilyMember.send_Fullname(data.get("FullName"));
+        manageFamilyMember.fileuploader_AvatarImage(data.get("AvatarImageSub"));
+        manageFamilyMember.send_DayofBirth(data.get("DayofBirth"));
+        manageFamilyMember.send_PhoneNumber(data.get("PhoneNumberSub"));
+        manageFamilyMember.select_Gender(data.get("GenderSub"));
+        manageFamilyMember.send_Address(data.get("AddressSub"),
+                                        data.get("CountrySub"),
+                                        data.get("CitySub"),
+                                        data.get("DistrictSub"),
+                                        data.get("WardSub"));
+        manageFamilyMember.send_Hight(data.get("Hight"));
+        manageFamilyMember.send_Weight(data.get("Weight"));
+        manageFamilyMember.select_Relationship(data.get("Relationship"));
         manageFamilyMember.clickon_Complete();
         Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         System.out.println("Create_SubAccount" + ManageFamilyMember.getToastMessage());
     }
 
-    @Test (priority = 6)
-    public void SubAccountUpdateInfo() throws InterruptedException {
+    @Test (priority = 6, dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+    public void SubAccountUpdateInfo(HashMap<String,String> data) throws InterruptedException {
         HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
 
         LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID,pass);
-        loginPage.waitForPageLoadComplete();
+        loginPage.login(data.get("ID"), data.get("Pass"));
 
         UserPage userPage = new UserPage(false);
         userPage.clickon_ManageMember_User();
 
         ManageFamilyMember manageFamilyMember = new ManageFamilyMember(true);
-        manageFamilyMember.select_SubAccount("Ngô Sắn Khoai");
-        manageFamilyMember.send_InsuranceCode("GD0111111111");
-        manageFamilyMember.send_CMND_CCCD("123456555");
-        manageFamilyMember.send_Fullname("Khoai Lang Nướng");
-        manageFamilyMember.fileuploader_AvatarImage("Spiderman.PNG");
-        manageFamilyMember.send_DayofBirth("01/01/2021");
-        manageFamilyMember.send_PhoneNumber("09099999999");
-        manageFamilyMember.select_Gender("Nam");
-        manageFamilyMember.send_Address("150 Trần Công An, Thành phố Biên Hòa, Đồng Nai, Việt Nam","Việt Nam","Tỉnh Bình Dương","Thành phố Thủ Dầu Một","Phường Phú Mỹ");
-        manageFamilyMember.send_Hight("170");
-        manageFamilyMember.send_Weight("50");
-        manageFamilyMember.select_Relationship("Họ hàng");
+        manageFamilyMember.select_SubAccount(data.get("FullName"));
+        manageFamilyMember.send_InsuranceCode(data.get("InsuranceCodeNew"));
+        manageFamilyMember.send_CMND_CCCD(data.get("CMND_CCCDNew"));
+        manageFamilyMember.send_Fullname(data.get("FullNameNew"));
+        manageFamilyMember.fileuploader_AvatarImage(data.get("AvatarImageNew"));
+        manageFamilyMember.send_DayofBirth(data.get("DayofBirthNew"));
+        manageFamilyMember.send_PhoneNumber(data.get("PhoneNumberNew"));
+        manageFamilyMember.select_Gender(data.get("GenderNew"));
+        manageFamilyMember.send_Address(data.get("AddressNew"), data.get("CountryNew"), data.get("CityNew"), data.get("DistrictNew"), data.get("WardNew"));
+        manageFamilyMember.send_Hight(data.get("HightNew"));
+        manageFamilyMember.send_Weight(data.get("WeightNew"));
+        manageFamilyMember.select_Relationship(data.get("RelationshipNew"));
         manageFamilyMember.clickon_Save();
         Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         System.out.println("SubAccountUpdateInfo" + ManageFamilyMember.getToastMessage());
     }
 
-    @Test (priority = 7)
-    public void DeleteAccount() throws InterruptedException {
+    @Test (priority = 7, dataProvider = "user", dataProviderClass = DataProviderFactory.class)
+    public void DeleteAccount(HashMap<String,String>data) throws InterruptedException {
         HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
 
         LoginPage loginPage = new LoginPage(true);
-        loginPage.login(userID,pass);
-        loginPage.waitForPageLoadComplete();
+        loginPage.login(data.get("ID"), data.get("Pass"));
 
         UserPage userPage = new UserPage(true);
         userPage.clickon_ManageMember_User();
 
         ManageFamilyMember manageFamilyMember = new ManageFamilyMember(true);
-        manageFamilyMember.select_SubAccount("Khoai Lang Nướng");
+        manageFamilyMember.select_SubAccount(data.get("FullNameNew"));
         manageFamilyMember.clickon_Delete_SubAccount();
         Assert.assertTrue(ManageFamilyMember.getToastMessage().contains("Thành công"),"Thành công");
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         System.out.println("DeleteAccount" + ManageFamilyMember.getToastMessage());
     }
 }

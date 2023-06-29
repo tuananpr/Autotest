@@ -19,7 +19,7 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     private final String xpath_DayofBirth = "//input[@placeholder='Ngày/tháng/năm']";
     private final String xpath_PhoneNumber = "//label[@translate='phoneNumber']/preceding-sibling::input";
     private final String xpath_Gender = "//label[@translate='gender']/preceding-sibling::select";
-    private final String xpath_Address = "//label[@translate='address']/preceding-sibling::input";
+    private final String xpath_Address = "//input[@id='address']";
     private final String xpath_Hight = "(//app-add-edit-sub-account/fieldset//input[contains(@class,'')])[9]";
     private final String xpath_Weight = "(//app-add-edit-sub-account/fieldset//input[contains(@class,'')])[10]";
     private final String xpath_Relationship = "//label[@translate='relationship']/preceding-sibling::select";
@@ -38,8 +38,10 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     private final String xpath_Button_Complete_ShareAccount = "//app-share-account-modal//button[contains(@class,'btn-success')]";
     private final String xpath_Button_Success = "//app-confirm//button[contains(@class,'btn-success')]";
     private final String xpath_Button_Select = "//app-select-share-type-modal//button[contains(@class,'btn-success')]";
-
+    private final String xpath_Label_Share = "//app-user//label[@class='toggle-switch']";
+    private final String xpath_Label_Shared = "//app-user//label[@class='toggle-switch checked']";
     private final String xpath_Account_Shared = "//span[contains(@class,'text-white')]";
+    private final String xpath_First_Account = "(//app-share-account-modal//fieldset//label[contains(@class,'pointer')])[1]";
     private final String xpath_Stop_ShareAccount = "//a[@translate='stopShares']";
 
     //elements
@@ -54,7 +56,8 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     private final Textbox textbox_DayofBirth = new Textbox(By.xpath(xpath_DayofBirth),"textbox_DayofBirth");
     private final Textbox textbox_PhoneNumber = new Textbox(By.xpath(xpath_PhoneNumber),"textbox_PhoneNumber");
     private final Select select_Gender = new Select(By.xpath(xpath_Gender),"select_Gender");
-
+    private final Label label_Share = new Label(By.xpath(xpath_Label_Share),"label_Share");
+    private final Label label_Shared = new Label(By.xpath(xpath_Label_Shared),"label_Shared");
     private final Textbox textbox_Hight = new Textbox(By.xpath(xpath_Hight),"textbox_Hight");
     private final Textbox textbox_Weight = new Textbox(By.xpath(xpath_Weight),"textbox_Weight");
     private final Select select_Relationship = new Select(By.xpath(xpath_Relationship),"select_Relationship");
@@ -70,6 +73,8 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     private final Button button_Complete_ShareAccount = new Button(By.xpath(xpath_Button_Complete_ShareAccount),"btc_Complete_ShareAccount");
     private final Button button_Account_Shared = new Button(By.xpath(xpath_Account_Shared),"btnAccountShared");
     private final Button button_Stop_ShareAccount = new Button(By.xpath(xpath_Stop_ShareAccount),"btn_Stop_ShareAccount");
+    private final Button button_First_Account = new Button(By.xpath(xpath_First_Account),"button_First_Account");
+    private final Label label_Method_ShareAccount = new Label(By.xpath(xpath_Method_ShareAccount),"label_Method_ShareAccout");
     //contructor
     public ManageFamilyMember(boolean assertOpen) {super(by,name,assertOpen);}
 
@@ -115,6 +120,7 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     }
 
     public void send_Address(String Address,String Country, String City, String District, String Ward){
+        textbox_Address.waitForElementToBePresent();
         textbox_Address.sendClearText(Address);
         waitForJSToComplete();
         GlobeDr.Pages.Modules.Address address = new Address(false);
@@ -194,41 +200,47 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
     public void clickon_ShareAccount(String Account){
         UserPage userPage = new UserPage(false);
         userPage.select_Account(Account);
-        button_Share_Account.waitForClickable();
-        button_Share_Account.click();
-        waitForJSToComplete();
-        clickon_ShareNewAccount();
-    }
-
-    public void clickon_ShareNewAccount(){
-        button_Share_NewAccount.waitForClickable();
-        button_Share_NewAccount.click();
-        waitForJSToComplete();
-    }
-
-    public void share_AccountWithUser(String account){
-        ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_List_ShareAccount),"ListAccountShare");
-        for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
-            if(listOfElements.getElement(i).getText().contains(account)){
-                listOfElements.getElement(i).click();
-            }
+        if (label_Share.isElementDisplay()) {
+            label_Share.click();
+            waitForJSToComplete();
+            button_Share_NewAccount.waitForClickable();
+            button_Share_NewAccount.click();
+            waitForJSToComplete();
+            button_First_Account.waitForClickable();
+            button_First_Account.click();
+            waitForJSToComplete();
+        } else {
+            label_Shared.isElementDisplay();
+            button_Edit_ShareAccount.waitForClickable();
+            button_Edit_ShareAccount.click();
+            waitForJSToComplete();
         }
     }
 
     public void share_Method(String method) throws InterruptedException {
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_Method_ShareAccount),"list_Method_ShareAccount");
-        for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
-            if(listOfElements.getElement(i).getText().contains(method)){
-                listOfElements.getElement(i).click();
+        if(listOfElements.getNumberOfElement() <= 2){
+            for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
+                if(listOfElements.getElement(i).getText().contains(method)){
+                    listOfElements.getElement(i).click();
+                }
             }
-        }
             button_Success_ShareAccount.waitForClickable();
             button_Success_ShareAccount.click();
-        if(button_Complete_ShareAccount.isElementDisplay()){
+            waitForJSToComplete();
             button_Complete_ShareAccount.waitForClickable();
             button_Complete_ShareAccount.click();
+            waitForJSToComplete();
+        } else {
+            for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
+                if(listOfElements.getElement(i).getText().contains(method)){
+                    listOfElements.getElement(i).click();
+                }
+            }
+            button_Success_ShareAccount.waitForClickable();
+            button_Success_ShareAccount.click();
+            waitForJSToComplete();
         }
-        waitForLoadingComplete();
     }
 
     public void clickon_Select_Method(){
@@ -236,8 +248,6 @@ public class ManageFamilyMember extends BaseGlobeDrPage {
         button_Select_Method_ShareAccount.click();
         waitForJSToComplete();
     }
-
-
 
     public void clickon_Edit_ShareAccount(String Account){
         UserPage userPage = new UserPage(false);

@@ -1,9 +1,6 @@
 package GlobeDr.Pages.MedicalTest;
 
-import Core.Selenium.Button;
-import Core.Selenium.Label;
-import Core.Selenium.ListOfElements;
-import Core.Selenium.Textbox;
+import Core.Selenium.*;
 import GlobeDr.Pages.BaseGlobeDrPage;
 import org.openqa.selenium.By;
 
@@ -26,8 +23,10 @@ public class OrgMedicalTest extends BaseGlobeDrPage {
     private final String xpath_textbox_Search_Staff = "//app-assign-sampler-modal//input[@placeholder]";
     private final String xpath_button_Search = "//app-assign-sampler-modal//i[@class='ic-gdr gdr-search']";
     private final String xpath_list_Diag_Staff = "//app-assign-sampler-modal//div[@class='row']//p[contains(@class,'text-uppercase')]";
-    private final String xpath_button_Compelete_Assign = "//div[@class='modal-footer']/button";
+    private final String xpath_button_Compelete = "//div[@class='modal-footer']/button";
     private static final String xpath_label_Name_Sampling_Staff = "//div[@translate='samplingStaff']//following-sibling::div[@class='text-primary']";
+    private final String xpath_textbox_Note_Sampled = "//simple-modal-wrapper//label[@translate='enterNotes']/preceding-sibling::textarea";
+    private final String xpath_fileUpload_Test_Result = "//app-file-upload";
     //elements
     private final Textbox textbox_Search_Order = new Textbox(By.xpath(xpath_textbox_Search_Order),"textbox_Search");
     private final Textbox textbox_ID = new Textbox(By.xpath(xpath_textbox_ID),"textbox_ID");
@@ -37,9 +36,10 @@ public class OrgMedicalTest extends BaseGlobeDrPage {
     private final Button button_Success = new Button(By.xpath(xpath_button_Success),"button_Success");
     private final Button button_Search = new Button(By.xpath(xpath_button_Search),"button_Search");
     private final Textbox textbox_Search_Staff = new Textbox(By.xpath(xpath_textbox_Search_Staff),"textbox_Search_Staff");
-    private final Button button_Compelete_Assign = new Button(By.xpath(xpath_button_Compelete_Assign),"button_Compelete_Assign");
+    private final Button button_Compelete = new Button(By.xpath(xpath_button_Compelete),"button_Compelete_Assign");
     private static final Label label_Name_Sampling_Staff = new Label(By.xpath(xpath_label_Name_Sampling_Staff),"label_Name_Sampling_Staff");
-    //contructors
+    private final Textbox textbox_Note_Sampled = new Textbox(By.xpath(xpath_textbox_Note_Sampled),"textbox_Note_Sampled");
+    private final FileUploader fileUploader_Test_Result = new FileUploader(By.xpath(xpath_fileUpload_Test_Result),"fileupload_TestResult");
     public OrgMedicalTest(Boolean assertOpen) {super(by,name,assertOpen);}
 
     public void clickonSearch(){
@@ -54,7 +54,7 @@ public class OrgMedicalTest extends BaseGlobeDrPage {
         waitForJSToComplete();
     }
 
-    public void clickonFilter(){
+     public void clickonFilter(){
         button_Filter.waitForClickable();
         button_Filter.click();
         waitForJSToComplete();
@@ -64,6 +64,7 @@ public class OrgMedicalTest extends BaseGlobeDrPage {
         clickonSearch();
         sendID(ID);
         clickonFilter();
+        waitForLoadingComplete();
     }
 
     public void clickonCancelOrderMedical(List<String> status){
@@ -122,10 +123,10 @@ public class OrgMedicalTest extends BaseGlobeDrPage {
         Thread.sleep(3000);
     }
 
-    public void clickonCompeleteAssign() throws InterruptedException {
-        button_Compelete_Assign.waitForClickable();
+    public void clickonCompelete() throws InterruptedException {
+        button_Compelete.waitForClickable();
         Thread.sleep(3000);
-        button_Compelete_Assign.click();
+        button_Compelete.click();
         waitForJSToComplete();
     }
 
@@ -142,12 +143,25 @@ public class OrgMedicalTest extends BaseGlobeDrPage {
                 waitForJSToComplete();
             }
         }
-        clickonCompeleteAssign();
+        clickonCompelete();
     }
 
     public static String getNameStaff(){
         label_Name_Sampling_Staff.waitForElementToBeDisplay();
         label_Name_Sampling_Staff.getText();
         return label_Name_Sampling_Staff.getText();
+    }
+
+    public void sendNoteSampled(String note) throws InterruptedException {
+        textbox_Note_Sampled.waitForElementToBePresent();
+        textbox_Note_Sampled.sendText(note);
+        waitForJSToComplete();
+        clickonCompelete();
+    }
+
+    public void sendTestResult() throws InterruptedException {
+        Thread.sleep(2000);
+        fileUploader_Test_Result.upload(System.getProperty("user.dir")+ "/src/main/resources/image/" + "ThorVN.PNG");
+        clickonCompelete();
     }
 }

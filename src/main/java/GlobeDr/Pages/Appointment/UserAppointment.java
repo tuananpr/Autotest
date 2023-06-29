@@ -53,7 +53,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final String xpath_FrontFaceIDcardCitizenIdentification = "(//button/app-file-upload/input)[3]";
     private final String xpath_BackFaceIDcardCitizenIdentification = "(//button/app-file-upload/input)[4]";
     private final String xpath_ConfirmPersonalInformation = "//button[@translate='confirmPersonalInformation']";
-    private final String xpath_IDAppointment = "//p[@class='fs18 mb5 text-dark fw-bold']";
+    private final String xpath_IDAppointment = "//app-appointment-detail-model//div[@class='d-flex']//p[contains(@class,'fw-bold')]";
 
 
     //elements
@@ -107,6 +107,7 @@ public class UserAppointment extends BaseGlobeDrPage {
     public void clickonCreateAppointment(){
         buttonCreateAppointment.waitForClickable();
         buttonCreateAppointment.click();
+        waitForLoadingComplete();
     }
 
     public void clickonAccount(){
@@ -176,7 +177,6 @@ public class UserAppointment extends BaseGlobeDrPage {
     }
 
     public void selectServices(String Service,String specialty, String day,String date, String session, String doctor) throws InterruptedException {
-        waitForLoadingComplete();
         clickonServices();
         ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_ListServices),"ListServices");
         for (int i = 0 ; i < listOfElements.getNumberOfElement(); i++){
@@ -184,11 +184,17 @@ public class UserAppointment extends BaseGlobeDrPage {
                 listOfElements.getElement(i).click();
                 waitForJSToComplete();
             }
-        }   if(labelServices.getText().equalsIgnoreCase("Khám lần đầu")){
-            Firsttimeexamination(day,session,doctor);
-            }
-                else { Reemamination(specialty, date,session);
+        }
+//            if(labelServices.getText().contentEquals(Service)){
+                switch (labelServices.getText().equalsIgnoreCase(Service)){
+                    case "Tái Khám":
+
                 }
+//            Firsttimeexamination(day,session,doctor);
+//            }
+//            else {
+//                Reemamination(specialty, date,session);
+//                }
     }
 
 

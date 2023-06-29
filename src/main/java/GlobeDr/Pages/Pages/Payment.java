@@ -40,7 +40,7 @@ public class Payment extends BaseGlobeDrPage {
     //contructor
     public Payment(Boolean assertOpen) {super(by,name,assertOpen);}
 
-    public void clickPayment(String IDCardBank,String CardHolderName,String CardMonth,String CardYear, String CardCVV) throws InterruptedException {
+    public void sendPayment(String IDCardBank,String CardHolderName,String CardMonth,String CardYear, String CardCVV) throws InterruptedException {
         waitForLoadingComplete();
 //        BrowserManager.getInstance().switchToWindow(0);
         textboxIDCardBank.sendClearText(IDCardBank);

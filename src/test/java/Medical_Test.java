@@ -24,7 +24,7 @@ public class Medical_Test extends Hooks {
 //        after();
 //    }
 
-    String id = "217794" ;
+    String id = "217797" ;
 
 //    @Test (priority = 1, dataProvider = "mergedDataProvider" ,dataProviderClass = DataProviderFactory.class)
 //    public void UserOrderMedicalTestAtlab(HashMap<String, String> data) throws InterruptedException {
@@ -54,25 +54,63 @@ public class Medical_Test extends Hooks {
 //        Assert.assertTrue(UserMedicalTest.getToastMessage().contains("Thành công"),"Thành công");
 //    }
 
+//    @Test(priority = 2, dataProvider = "mergedDataProvider", dataProviderClass = DataProviderFactory.class)
+//    public void OrgAssignSamplingStaff(HashMap<String, String> data) throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.waitForPageLoadComplete();
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login(data.get("orgId"),data.get("orgPass"));
+//
+//        OrgPage orgPage = new OrgPage(false);
+//        orgPage.selectManagement(data.get("ManageHospital/Clinic"),data.get("OrgDiag"),data.get("MedicalTestOrder"));
+//
+//        OrgMedicalTest orgMedicalTest = new OrgMedicalTest(false);
+//        orgMedicalTest.searchMedicalTestByID(id);
+//        orgMedicalTest.selectOption(data.get("AssignSamplingStaff"));
+//        orgMedicalTest.selectDiagStaff(data.get("nameStaffDiag"));
+//        Assert.assertTrue(OrgMedicalTest.getToastMessage().contains("Thành công"),"Thành công");
+//        System.out.println("SampingStaff: " + OrgMedicalTest.getNameStaff());
+//    }
+
+//    @Test(priority = 2, dataProvider = "mergedDataProvider", dataProviderClass = DataProviderFactory.class)
+//    public void StaffSampled(HashMap<String, String> data) throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.waitForPageLoadComplete();
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login(data.get("staffID"), data.get("staffPass"));
+//
+//        OrgPage orgPage = new OrgPage(true);
+//        orgPage.selectManagement(data.get("ManageHospital/Clinic"),data.get("OrgDiag"),data.get("MedicalTestOrder"));
+//
+//        OrgMedicalTest orgMedicalTest = new OrgMedicalTest(false);
+//        orgMedicalTest.searchMedicalTestByID(id);
+//        orgMedicalTest.selectOption(data.get("sampled"));
+//        orgMedicalTest.sendNoteSampled(data.get("noteSampled"));
+//        Assert.assertTrue(OrgMedicalTest.getToastMessage().contains("Thành công"),"Thành công");
+//    }
+
     @Test(priority = 2, dataProvider = "mergedDataProvider", dataProviderClass = DataProviderFactory.class)
-    public void OrgAssignSamplingStaff(HashMap<String, String> data) throws InterruptedException {
+    public void SendTestResults(HashMap<String, String> data) throws InterruptedException {
         HomePage homePage = new HomePage(true);
         homePage.waitForPageLoadComplete();
         homePage.clickon_LoginButton();
 
         LoginPage loginPage = new LoginPage(true);
-        loginPage.login(data.get("orgId"),data.get("orgPass"));
-        loginPage.waitForPageLoadComplete();
+        loginPage.login(data.get("staffID"), data.get("staffPass"));
 
-        OrgPage orgPage = new OrgPage(false);
-        orgPage.selectManagement(data.get("ManageHospital/Clinic"),data.get("OrgDiag"),data.get("MedicalTestOrder"));
+        OrgPage orgPage = new OrgPage(true);
+        orgPage.selectManagement(data.get("ManageHospital/Clinic"), data.get("OrgDiag"), data.get("MedicalTestOrder"));
 
         OrgMedicalTest orgMedicalTest = new OrgMedicalTest(false);
         orgMedicalTest.searchMedicalTestByID(id);
-        orgMedicalTest.selectOption(data.get("AssignSamplingStaff"));
-        orgMedicalTest.selectDiagStaff(data.get("nameStaffDiag"));
-        Assert.assertTrue(OrgMedicalTest.getNameStaff().contains("Nhân viên Org"));
-        System.out.println("SampingStaff: " + OrgMedicalTest.getNameStaff());
+        orgMedicalTest.selectOption(data.get("sendTestResults"));
+        orgMedicalTest.sendTestResult();
+        Assert.assertTrue(OrgMedicalTest.getToastMessage().contains("Thành công"),"Thành công");
+
     }
 }
 

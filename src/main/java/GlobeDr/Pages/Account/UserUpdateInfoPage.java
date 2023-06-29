@@ -5,6 +5,7 @@ import Core.Selenium.FileUploader;
 import Core.Selenium.Select;
 import Core.Selenium.Textbox;
 import GlobeDr.Pages.BaseGlobeDrPage;
+import GlobeDr.Pages.Modules.Address;
 import GlobeDr.Pages.Modules.Calendar;
 import org.openqa.selenium.By;
 
@@ -86,9 +87,7 @@ public class UserUpdateInfoPage extends BaseGlobeDrPage {
     }
 
     public void clickon_DayofBirth(String Date){
-        button_Calendar.waitForClickable();
-        button_Calendar.click();
-        Calendar calendar = new Calendar(true);
+        Calendar calendar = new Calendar(false);
         calendar.selectDate(Date);
     }
 
@@ -144,5 +143,10 @@ public class UserUpdateInfoPage extends BaseGlobeDrPage {
         button_Save.waitForClickable();
         button_Save.click();
         waitForJSToComplete();
+    }
+
+    public void send_Address(String Address){
+        Address address = new Address(false);
+        address.send_Address(Address);
     }
 }

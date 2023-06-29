@@ -41,7 +41,7 @@ public class OrgPage extends BaseGlobeDrPage {
                 for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
                     if(listOfElements.getElement(i).getText().contains(feature)){
                         listOfElements.getElement(i).click();
-                        waitForJSToComplete();
+                        waitForLoadingComplete();
                     }
                 }
             } else {
@@ -52,14 +52,14 @@ public class OrgPage extends BaseGlobeDrPage {
                 for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
                     if(listOfElements.getElement(i).getText().contains(nameOrg)){
                         listOfElements.getElement(i).click();
-                        waitForJSToComplete();
+                        waitForLoadingComplete();
                     }
                 }
             } ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_ListFeature),"listFeature");
             for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
                 if(listOfElements.getElement(i).getText().contains(feature)){
                     listOfElements.getElement(i).click();
-                    waitForJSToComplete();
+                    waitForLoadingComplete();
                 }
             }
         } else {
@@ -67,7 +67,7 @@ public class OrgPage extends BaseGlobeDrPage {
             buttonChangeOrg.click();
             waitForJSToComplete();
             selectManagement.selectByContains(role);
-            waitForPageLoadComplete();
+            waitForLoadingComplete();
         }
     }
 

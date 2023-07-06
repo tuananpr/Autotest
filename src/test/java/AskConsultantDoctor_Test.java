@@ -1,69 +1,72 @@
 import Core.Support.General.Hooks;
-import GlobeDr.Pages.AskConsultantDoctor.Coordinator;
 import GlobeDr.Pages.AskConsultantDoctor.Doctor;
-import GlobeDr.Pages.AskConsultantDoctor.UserAskConsultantDoctor;
 import GlobeDr.Pages.HomePage;
 import GlobeDr.Pages.LoginPage;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class AskConsultantDoctor_Test extends Hooks {
-    @BeforeMethod
+    @BeforeTest
+
     public void setup(){
         before();
         beforeWeb();
     }
 
-    @AfterMethod
+    @AfterTest
+
     public void tearDown(){
         after();
     }
-    String id
-            ;
+    String id = "413946";
 
-    @Test (priority = 1)
-    public void UserAskConsultantDoctor() throws InterruptedException {
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login("0987654326","123456");
-        loginPage.waitForPageLoadComplete();
-
-        UserAskConsultantDoctor userAskConsultantDoctor = new UserAskConsultantDoctor(false);
-        userAskConsultantDoctor.clickon_Appointment();
-        userAskConsultantDoctor.clickon_CreateNewQuestion();
-        userAskConsultantDoctor.select_User("BN.Tuan.26");
-        userAskConsultantDoctor.send_Height("178");
-        userAskConsultantDoctor.send_Weight("78");
-        userAskConsultantDoctor.send_Temperature("38");
-        userAskConsultantDoctor.send_Question("[Auto] Câu hỏi về răng miệng, tôi muốn biết răng tôi dạo này hay đau nhức");
-        userAskConsultantDoctor.clickon_ChooseDisease("Răng miệng");
+//    @Test (priority = 1)
+//    public void UserAskConsultantDoctor() throws InterruptedException {
+//        HomePage homePage = new HomePage(false);
+//        homePage.waitForPageLoadComplete();
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login("0963259524","123456");
+//
+//        UserPage userPage = new UserPage(false);
+//        userPage.selectFeature("Hỏi bác sĩ tư vấn");
+//
+//        UserAskConsultantDoctor userAskConsultantDoctor = new UserAskConsultantDoctor(false);
+//        SelectAccount selectAccount = new SelectAccount(false);
+//        userAskConsultantDoctor.clickonCreateNewQuestion();
+//        selectAccount.selectAccount("Tuan");
+//        userAskConsultantDoctor.send_Height("178");
+//        userAskConsultantDoctor.send_Weight("78");
+//        userAskConsultantDoctor.send_Temperature("38");
+//        userAskConsultantDoctor.send_Question("[Auto] Câu hỏi về răng miệng, tôi muốn biết răng tôi dạo này hay đau nhức");
+//        userAskConsultantDoctor.clickon_ChooseDisease("Răng miệng");
 //        userAskConsultantDoctor.send_ImageQuestion("avatar.png");
-        userAskConsultantDoctor.clickon_Create();
-        id = userAskConsultantDoctor.get_IDConsultant();
-    }
+//        userAskConsultantDoctor.clickon_Create();
+//        id = userAskConsultantDoctor.get_IDConsultant();
+//    }
 
-    @Test (priority = 2)
-    public void CoordinatorEditSpecialty() throws InterruptedException {
-        HomePage homePage = new HomePage(true);
-        homePage.waitForPageLoadComplete();
-        homePage.clickon_LoginButton();
-        LoginPage loginPage = new LoginPage(true);
-        loginPage.login("096325952516","123456");
-        loginPage.waitForPageLoadComplete();
-
-        Coordinator coordinator = new Coordinator(false);
-        coordinator.clickon_Role("Vào trang điều phối viên");
-        coordinator.clickon_Coordinator();
-        coordinator.clickon_Dropdown(id);
-        coordinator.clickon_Dropdown_EditSpecialty();
-        coordinator.select_EditSpecialty("Tai Mũi Họng","Tự động");
-        coordinator.clickon_Dropdown(id);
-        coordinator.clickon_Dropdown_InviteDoctor("BS TÂM");
-        id = coordinator.get_IDConsultant(id);
-    }
+//    @Test (priority = 2)
+//    public void CoordinatorEditSpecialty() throws InterruptedException {
+//        HomePage homePage = new HomePage(true);
+//        homePage.waitForPageLoadComplete();
+//        homePage.clickon_LoginButton();
+//
+//        LoginPage loginPage = new LoginPage(true);
+//        loginPage.login("096325952516","123456");
+//
+//        OrgPage orgPage = new OrgPage(false);
+//        orgPage.selectManagement("Vào trang điều phối viên","","Điều phối viên");
+//
+//        Coordinator coordinator = new Coordinator(false);
+//        coordinator.clickon_Dropdown(id);
+//        coordinator.clickon_Dropdown_EditSpecialty();
+//        coordinator.select_EditSpecialty("Nhi khoa","Tự động");
+//        coordinator.clickon_Dropdown(id);
+//        coordinator.clickon_Dropdown_InviteDoctor("BS.TUAN.27");
+//        id = coordinator.get_IDConsultant(id);
+//    }
 
     @Test (priority = 3)
     public void Doctor() throws InterruptedException{
@@ -88,7 +91,6 @@ public class AskConsultantDoctor_Test extends Hooks {
         doctor.select_Hospital("BỆNH VIỆN TRƯNG VƯƠNG");
         doctor.send_NamePrescribeTest("Mỡ Máu","LIPID - MỠ MÁU","Cholesterol");
         doctor.clickon_Completed();
-
         id = doctor.get_IDConsultant();
     }
 

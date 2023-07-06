@@ -162,10 +162,10 @@ public class Coordinator extends BaseGlobeDrPage {
             Thread.sleep(2000);
             button_Confirm.waitForClickable();
             button_Confirm.click();
-            waitForLoadingComplete();
+            waitForJSToComplete();
         } else {
         }
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
 
     public void clickon_SearchDoctor(){

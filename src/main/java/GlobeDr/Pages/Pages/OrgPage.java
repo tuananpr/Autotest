@@ -17,6 +17,7 @@ public class OrgPage extends BaseGlobeDrPage {
     private final String xpath_AppManagement = "//app-change-management/div/select/option";
     private final String xpath_NameOrg = "//h1//span[contains(@class,'text-primary')]";
     private final String xpath_ChangeOrg = "//app-dashboard//a[@translate='change']";
+    private final String xpath_ListRole = "//app-change-management//select/option";
     private final String xpath_ListOrg = "//p[@translate='selectOrganization']//following-sibling::div/div[contains(@class,'list-group')]";
     private final String xpath_ListFeature = "//app-dashboard//a//p[@class='text-nowrap']";
     private final String xpath_PageRCE_Org = "//img[@src='/assets/images/icons/organization/medicine.png']";
@@ -27,7 +28,6 @@ public class OrgPage extends BaseGlobeDrPage {
     private final Select selectManagement = new Select(By.xpath(xpath_AppManagement),"selectManagement");
     private final Label labelNameOrg = new Label(By.xpath(xpath_NameOrg),"labelNameOrg");
     private final Button buttonChangeOrg = new Button(By.xpath(xpath_ChangeOrg),"btnChangeOrg");
-
     private final Button buttonRCEOrg = new Button(By.xpath(xpath_PageRCE_Org),"btnPageRCE");
     private final Button buttonAppointmentOrg = new Button(By.xpath(xpath_PageAppointment_Org),"btnAppointmentOrg");
     private final Button buttonMedicalTestOrderOrg = new Button(By.xpath(xpath_PageMedicalTestOrder_Org),"btnMedicalTestOrderOrg");
@@ -55,19 +55,25 @@ public class OrgPage extends BaseGlobeDrPage {
                         waitForLoadingComplete();
                     }
                 }
-            } ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_ListFeature),"listFeature");
+            }
+        } else {
+            buttonChangeRole.waitForClickable();
+            buttonChangeRole.click();
+            waitForJSToComplete();
+            ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_ListRole),"listRole");
             for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
-                if(listOfElements.getElement(i).getText().contains(feature)){
+                if(listOfElements.getElement(i).getText().contains(role)){
                     listOfElements.getElement(i).click();
                     waitForLoadingComplete();
                 }
             }
-        } else {
-            buttonChangeOrg.waitForClickable();
-            buttonChangeOrg.click();
-            waitForJSToComplete();
-            selectManagement.selectByContains(role);
-            waitForLoadingComplete();
+        }
+        ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_ListFeature),"listFeature");
+        for (int i = 0; i < listOfElements.getNumberOfElement(); i++) {
+            if(listOfElements.getElement(i).getText().contains(feature)){
+                listOfElements.getElement(i).click();
+                waitForLoadingComplete();
+            }
         }
     }
 

@@ -12,24 +12,15 @@ public class UserAppointment extends BaseGlobeDrPage {
     private static final String name = "Appointment";
 
     //locators
-    private final String xpath_Appointment = "//a[@href='/appointment']";
     private final String xpath_CreateNewAppointment = "//button[@translate='createNewAppointment']";
-    private final String xpath_ShowAccount = "//div[@class='form-control d-flex align-items-center']";
-
     private final String xpath_InputHospitalClinic = "//div[@class='row no-margin']/div/div/input";
     private final String xpath_SearchHospitalClinic = "//div[@class='row no-margin']/div/div[@class='form-group']/i";
-
     private final String xpath_LabelHospitalClinic = "//label[@translate='selectHospitalClinic']/preceding-sibling::span";
     public final String xpath_ListHospitalClinic = "//div[@class='mr10']";
     private final String xpath_ButtonDone = "//button[@translate='done']";
-    private final String xpath_LabelHospitalNearMe = "//a[@translate='nearMe']";
-    private final String xpath_InputNameHospitalClinic = "(//div[@class='form-group']/input[contains(@class, 'ng-valid')])[2]";
-    private final String xpath_ListHospitalClinicNearMe = "//div[contains(@class, 'card-horizontal')]/div[@class='mr10']/p[@class='fw-bold mb5']";
     private final String xpath_LabelServices = "//label[@translate='selectServices']/preceding-sibling::button";
     private final String xpath_ListServices = "//li[@role='menuitem']";
-    private final String xpath_SelectSession = "//select[@class='form-control ng-pristine ng-valid ng-touched']";
-    private final String xpath_FirsttimeExamination = "//p[contains(text(),'Khám lần đầu')]";
-    private final String xpath_Reexamination = "//p[contains(text(),'Tái khám')]";
+    private final String xpath_SelectSession = "((//app-add-edit-appointment//select)[1])";
     private final String xpath_dateAndSpeciatly = "//label[@translate='dateAndSpecialty']/preceding-sibling::span";
     public final String xpath_Day = "//button[contains(@class,'btn bg-bright-gray img50-50 fs20 ma5 bd-radius-50p')]";
     public final String xpath_Session = "//div[@class='tabs-line']/ul/li";
@@ -37,14 +28,12 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final String xpath_ButtonSelect = "//button[@translate='select']";
     private final String xpath_SelectSpecialty = "//label[@translate='specialty']/preceding-sibling::select";
     public final String xpath_ExaminationSession = "//label[@translate='examinationSession']/preceding-sibling::select/option";
-    private final String xpath_Calender = "//div[@class='ui-datepicker']";
     private final String xpath_ButtonBillingInfoTax = "((//div/div[@class='d-flex justify-content-between align-items-center form-group']/label)[2])";
     private final String xpath_PhoneNumber = "//label[@translate='phoneNumber']/preceding-sibling::input";
     private final String xpath_CompanyName = "//label[@translate='companyName']/preceding-sibling::input";
     private final String xpath_CompanyAddress = "//label[@translate='address']/preceding-sibling::input";
     private final String xpath_CompanyTaxCode = "//label[@translate='taxCode']/preceding-sibling::input";
     private final String xpath_ButtonPayment = "//button[contains(@class,'btn btn-success')]";
-    private final String xpath_ButtonConfirmAppointment = "//button[@translate='confirmAppointment']";
     private final String xpath_ButtonContinue = "//button[@translate='warningAppt1']";
     private final String xpath_QRCodeHealthInsurance = "//label[@translate='qRCodeHealthInsurance']/preceding-sibling::input";
     private final String xpath_FrontFaceHealthInsurance = "(//button/app-file-upload/input)[1]";
@@ -52,32 +41,19 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final String xpath_IDcardCitizenIdentification = "//label[@translate='idCardCitizenIdentification']/preceding-sibling::input";
     private final String xpath_FrontFaceIDcardCitizenIdentification = "(//button/app-file-upload/input)[3]";
     private final String xpath_BackFaceIDcardCitizenIdentification = "(//button/app-file-upload/input)[4]";
-    private final String xpath_ConfirmPersonalInformation = "//button[@translate='confirmPersonalInformation']";
     private final String xpath_IDAppointment = "//app-appointment-detail-model//div[@class='d-flex']//p[contains(@class,'fw-bold')]";
 
 
     //elements
-    private final Button buttonAppointment = new Button(By.xpath(xpath_Appointment),"btnAppointment");
     private final Button buttonCreateAppointment = new Button(By.xpath(xpath_CreateNewAppointment),"btnCreateNewAppointment");
-    private final Button buttonShowAccount = new Button(By.xpath(xpath_ShowAccount),"btnShowAccount");
     private final Textbox textboxHospitalClinic = new Textbox(By.xpath(xpath_InputHospitalClinic),"textboxHospitalClinic");
     private final Button buttonSearchHospitalClinic = new Button(By.xpath(xpath_SearchHospitalClinic),"btnSearchHospitalClinic");
-
     private final Button buttonHospitalClinic = new Button(By.xpath(xpath_LabelHospitalClinic),"btnHospitalClinic");
-
     private final Button buttonDone = new Button(By.xpath(xpath_ButtonDone),"btnDone");
-    private final Button buttonLabelHospitalNearMe = new Button(By.xpath(xpath_LabelHospitalNearMe),"btvLabelHospitalNearMe");
-    private final Textbox textboxInputNameHospitalClinicNearMe = new Textbox(By.xpath(xpath_InputNameHospitalClinic),"textboxHospitalClinicNearMe");
-    private final Select selectHospitalClinicNearMe = new Select(By.xpath(xpath_ListHospitalClinicNearMe),"selectHospitalClinicNearMe");
-    private final Button buttonServices = new Button(By.xpath(xpath_LabelServices),"btnServices");
     private final Label labelServices = new Label(By.xpath(xpath_LabelServices),"labelServices");
-    private final Select selectServices = new Select(By.xpath(xpath_ListServices),"selectServices");
-    private final Label labelFirsttimeExamination = new Label(By.xpath(xpath_FirsttimeExamination),"labelFirsttimeExamination");
-    private final Label labelReexamination = new Label(By.xpath(xpath_Reexamination),"labelReexamination");
     private final Button buttondateAndSpecialty = new Button(By.xpath(xpath_dateAndSpeciatly),"btndateAndSpecialty");
     private final Button buttonSelect = new Button(By.xpath(xpath_ButtonSelect),"btnSelect");
     private final Select selectSpecialty = new Select(By.xpath(xpath_SelectSpecialty),"SelectSpecialty");
-    private final Button buttonCalender = new Button(By.xpath(xpath_Calender),"btcCalender");
     private final Select selectSession = new Select(By.xpath(xpath_SelectSession),"selectSession");
     private final Button buttonBillingInfoTax = new Button(By.xpath(xpath_ButtonBillingInfoTax),"btnBillingInfoTax");
     private final Textbox textboxPhoneNumber = new Textbox(By.xpath(xpath_PhoneNumber),"textboxPhoneNumber");
@@ -85,7 +61,6 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final Textbox textboxCompanyAddress = new Textbox(By.xpath(xpath_CompanyAddress),"textboxCompanyAddress");
     private final Textbox textboxCompanyTaxCode = new Textbox(By.xpath(xpath_CompanyTaxCode), "textboxCompanyTaxCode");
     private final Button buttonPaymentAppoitnment = new Button(By.xpath(xpath_ButtonPayment),"btnPayment");
-    private final Button buttonConfirmAppointment = new Button(By.xpath(xpath_ButtonConfirmAppointment),"btnConfirmAppoitnment");
     private final Button buttonContinue = new Button(By.xpath(xpath_ButtonContinue),"btcContinue");
     private final Textbox textboxQRCodeHealthInsurance = new Textbox(By.xpath(xpath_QRCodeHealthInsurance),"textboxQRCodeHealthInsurance");
     private final FileUploader fileUploaderFrontFaceHealthInsurance = new FileUploader(By.xpath(xpath_FrontFaceHealthInsurance),"textboxFrontFaceHealthInsurance");
@@ -93,15 +68,10 @@ public class UserAppointment extends BaseGlobeDrPage {
     private final Textbox textboxIDcardCitizenIdentification = new Textbox(By.xpath(xpath_IDcardCitizenIdentification),"textboxIDcardCitizenIdentification");
     private final FileUploader fileUploaderFrontFaceIDcardCitizenIdentification = new FileUploader(By.xpath(xpath_FrontFaceIDcardCitizenIdentification),"textboxFrontFaceIDcardCitizenIdentification");
     private final FileUploader fileUploaderBackFaceIDcardCitizenIdentification = new FileUploader(By.xpath(xpath_BackFaceIDcardCitizenIdentification),"textboxBackFaceIDcardCitizenIdentification");
-    private final Button buttonConfirmPersonalInformation = new Button(By.xpath(xpath_ConfirmPersonalInformation),"btnConfrimPersonalInformation");
     private final Label labelIDAppointment = new Label(By.xpath(xpath_IDAppointment),"labelIDAppointment");
 
     //contructor
     public UserAppointment(boolean assertOpen) {super(by,name, assertOpen);
-    }
-    public void clickonAppointment(){
-        buttonAppointment.waitForClickable();
-        buttonAppointment.click();
     }
 
     public void clickonCreateAppointment(){
@@ -109,14 +79,6 @@ public class UserAppointment extends BaseGlobeDrPage {
         buttonCreateAppointment.click();
         waitForLoadingComplete();
     }
-
-    public void clickonAccount(){
-        buttonShowAccount.waitForClickable();
-        buttonShowAccount.click();
-    }
-
-
-
 
     public void clickonHospitalClinic(){
         buttonHospitalClinic.waitForClickable();
@@ -146,6 +108,7 @@ public class UserAppointment extends BaseGlobeDrPage {
                 listOfElements.getElement(i).click();
                 waitForJSToComplete();
                 clickonDone();
+                waitForLoadingComplete();
             }
         }
     }
@@ -156,20 +119,6 @@ public class UserAppointment extends BaseGlobeDrPage {
         waitForJSToComplete();
     }
 
-    public void clickonHospitalNearMe(){
-        buttonLabelHospitalNearMe.waitForClickable();
-        buttonLabelHospitalNearMe.click();
-    }
-
-    public void sendHospitalNearMe(String HospitalNearMe){
-        textboxInputNameHospitalClinicNearMe.waitForElementToBePresent();
-        textboxInputNameHospitalClinicNearMe.sendClearText(HospitalNearMe);
-    }
-
-    public void selectHospitalClinicNearMe(String HopitalNearMe){
-        selectHospitalClinicNearMe.waitForElementToBeDisplay();
-        selectHospitalClinicNearMe.selectByVisibleText(HopitalNearMe);
-    }
 
     public void clickonServices(){
         labelServices.waitForElementToBeDisplay();
@@ -185,16 +134,16 @@ public class UserAppointment extends BaseGlobeDrPage {
                 waitForJSToComplete();
             }
         }
-//            if(labelServices.getText().contentEquals(Service)){
-                switch (labelServices.getText().equalsIgnoreCase(Service)){
-                    case "Tái Khám":
-
+                switch (Service){
+                    case "[1] Khám lần đầu - Không BHYT":
+                        Firsttimeexamination(day,session,doctor);
+                        break;
+                    case "[3] Tái khám - Không BHYT":
+                        Reemamination(specialty,date,session);
+                        break;
                 }
-//            Firsttimeexamination(day,session,doctor);
-//            }
-//            else {
-//                Reemamination(specialty, date,session);
-//                }
+
+
     }
 
 
@@ -230,11 +179,10 @@ public class UserAppointment extends BaseGlobeDrPage {
         selectSpecialty.waitForElementToBeDisplay();
         selectSpecialty.selectByVisibleText(specialty);
         waitForJSToComplete();
-        buttonCalender.waitForClickable();
-        buttonCalender.click();
-        Calendar calendar = new Calendar(true);
+        Calendar calendar = new Calendar(false);
         calendar.selectDate(date);
-
+        Thread.sleep(1000);
+        selectSession.click();
         ListOfElements listOfElementsSession = new ListOfElements(By.xpath(xpath_ExaminationSession),"ListSession");
         for (int i = 0; i < listOfElementsSession.getNumberOfElement(); i++){
             if(listOfElementsSession.getElement(i).getText().contains(session)){
@@ -244,11 +192,6 @@ public class UserAppointment extends BaseGlobeDrPage {
         }
     }
 
-    public void selectSession(String session){
-        selectSession.waitForElementToBeDisplay();
-        selectSession.selectByVisibleText(session);
-        waitForJSToComplete();
-    }
     public void clickonBillingInfoTax(){
         buttonBillingInfoTax.waitForClickable();
         buttonBillingInfoTax.click();
@@ -292,32 +235,6 @@ public class UserAppointment extends BaseGlobeDrPage {
         waitForLoadingComplete();
     }
 
-    public void clickonConfirmAppointment(){
-        buttonConfirmAppointment.waitForClickable();
-        buttonConfirmAppointment.click();
-    }
-
-    public void sendInformation(String QRcodeInsurance, String FrontFaceHealthInsurance, String BackFaceHealthInsurance, String IDCard, String FrontFaceIDcard, String BackFaceIDcard) throws InterruptedException {
-        if(buttonContinue.isElementDisplay()){
-            buttonContinue.click();
-            sleep(2000);
-            waitForJSToComplete();
-            sendQRCodeHealthInsurance(QRcodeInsurance);
-            sendFrontFaceHealthInsurance(FrontFaceHealthInsurance);
-            sendBackFaceHealthInsurance(BackFaceHealthInsurance);
-            sendIDCardCitizenIdentification(IDCard);
-            sendFrontFaceIDCardCitizenIdentification(FrontFaceIDcard);
-            sendBackFaceIDCardCitizenIdentification(BackFaceIDcard);
-        } else {
-            sleep(2000);
-            sendQRCodeHealthInsurance(QRcodeInsurance);
-            sendFrontFaceHealthInsurance(FrontFaceHealthInsurance);
-            sendBackFaceHealthInsurance(BackFaceHealthInsurance);
-            sendIDCardCitizenIdentification(IDCard);
-            sendFrontFaceIDCardCitizenIdentification(FrontFaceIDcard);
-            sendBackFaceIDCardCitizenIdentification(BackFaceIDcard);
-        }
-    }
     public void sendQRCodeHealthInsurance(String QRcodeInsurance) throws InterruptedException {
         sleep(2000);
         textboxQRCodeHealthInsurance.waitForElementToBeDisplay();
@@ -359,35 +276,4 @@ public class UserAppointment extends BaseGlobeDrPage {
         System.out.println(ID);
         return ID;
     }
-
-
-//    public void clickonPayment(String StatusAppointment) throws InterruptedException {
-//        ListOfElements listOfElements = new ListOfElements(By.xpath(xpath_StatusAppointment),"IDAppointment");
-//        for(int i = 0; i < listOfElements.getNumberOfElement(); i++){
-//            if(listOfElements.getElement(i).getText().contains(StatusAppointment)){
-//                listOfElements.getElement(i).click();
-//                waitForJSToComplete();
-//            }
-//        }
-//        buttonPayment.waitForClickable();
-//        buttonPayment.click();
-//        Thread.sleep(6000);
-//        BrowserManager.getInstance().switchToWindow(1);
-//        textboxIDCardBank.sendClearText("4111-1111-1111-1111");
-//        textboxCardHolderName.sendClearText("Vũ Trụ");
-//        textboxCardDate.sendText("05");
-//        Thread.sleep(700);
-//        textboxCardDate.sendText("25");
-//        textboxCardCVV.sendText("897");
-//        buttonNextPayment.click();
-//        buttonConfirmPayment.waitForClickable();
-//        buttonConfirmPayment.click();
-//        waitForJSToComplete();
-//        buttonConfirmPayoo.waitForClickable();
-//        buttonConfirmPayoo.click();
-//        BrowserManager.getInstance().closeWindow();
-//    }
-
-
-
 }
